@@ -1,8 +1,44 @@
-/* add css styles here (optional) */
+.snaplist {
+  display: flex;
+  flex: 1;
+  max-width: 100%;
+  scroll-snap-type: x mandatory;
+  flex-direction: row;
+  overflow-y: hidden;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
 
-.test {
-  display: inline-block;
-  margin: 2em auto;
-  border: 2px solid #000;
-  font-size: 2em;
+.snaplist::-webkit-scrollbar {
+  display: none;
+}
+
+.snapitem {
+  flex: 1;
+  display: flex;
+  flex-grow: initial;
+  padding-left: 15px;
+  padding-right: 15px;
+  scroll-snap-align: center;
+}
+
+.snapitem_center {
+  scroll-snap-align: center;
+}
+
+.snapitem_start {
+  scroll-snap-align: start;
+}
+
+.snapitem_end {
+  scroll-snap-align: end;
+}
+
+.snapitem_none {
+  scroll-snap-align: none;
+}
+
+.snapitem_forcestop {
+  scroll-snap-stop: always;
 }

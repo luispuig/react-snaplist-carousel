@@ -1,6 +1,6 @@
 {
   "name": "react-snaplist-carousel",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A light, pure React, no dependencies and flexible carousel.",
   "author": "luispuig",
   "license": "MIT",
@@ -19,23 +19,38 @@
     "start": "rollup -c -w",
     "prepare": "npm run build",
     "predeploy": "cd example && npm install && npm run build",
-    "deploy": "gh-pages -d example/build"
+    "deploy": "gh-pages -d example/build",
+    "linter": "tsc --project ./tsconfig.json && eslint './src/**/*.{ts,tsx,.js,.jsx}'",
+    "precommit": "lint-staged",
+    "prepush": "npm run linter && CI=true npm test"
   },
   "dependencies": {},
   "peerDependencies": {
-    "prop-types": "^15.5.4",
-    "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0"
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   },
   "devDependencies": {
     "@svgr/rollup": "^2.4.1",
     "@types/jest": "^23.1.5",
     "@types/react": "^16.3.13",
     "@types/react-dom": "^16.0.5",
+    "@typescript-eslint/eslint-plugin": "^2.19.2",
+    "@typescript-eslint/parser": "^2.19.2",
     "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.3",
     "babel-runtime": "^6.26.0",
     "cross-env": "^5.1.4",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-config-react-app": "^5.2.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.18.3",
+    "eslint-plugin-react-hooks": "^2.3.0",
     "gh-pages": "^1.2.0",
+    "husky": "^4.2.2",
+    "lint-staged": "^10.0.7",
+    "prettier": "^1.19.1",
+    "prettier-eslint": "^9.0.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts-ts": "^2.16.0",
@@ -47,9 +62,29 @@
     "rollup-plugin-postcss": "^1.6.2",
     "rollup-plugin-typescript2": "^0.17.0",
     "rollup-plugin-url": "^1.4.0",
-    "typescript": "^2.8.3"
+    "typescript": "^3.7.5"
   },
   "files": [
     "dist"
-  ]
+  ],
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "lint-staged": {
+    "**/*.+(js|jsx|ts|tsx)": [
+      "eslint",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run precommit",
+      "pre-push": "npm run prepush"
+    }
+  }
 }
