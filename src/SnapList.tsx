@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { combineClassnames as c } from './utils';
+import { mergeStyles } from './utils';
 
 import styles from './styles.css';
 
@@ -24,7 +24,11 @@ export const SnapItem: React.FC<{
   const style = { paddingLeft, paddingRight };
   return (
     <div
-      className={c(styles.snapitem, styles[`snapitem_${snapAlign}`], forceStop ? styles.snapitem_forcestop : null)}
+      className={mergeStyles(
+        styles.snapitem,
+        styles[`snapitem_${snapAlign}`],
+        forceStop ? styles.snapitem_forcestop : null,
+      )}
       style={style}
     >
       {children}

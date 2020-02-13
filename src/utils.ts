@@ -1,4 +1,4 @@
-export const combineClassnames = (...classnames: (string | null | undefined)[]) => classnames.filter(Boolean).join(' ');
+export const mergeStyles = (...classnames: (string | null | undefined)[]) => classnames.filter(Boolean).join(' ');
 
 interface Styles extends CSSStyleDeclaration {
   scrollSnapAlign: string;
