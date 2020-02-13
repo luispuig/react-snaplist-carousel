@@ -1,55 +1,3 @@
-# react-snaplist-carousel
-
-The lightest modern carousel for your React apps.
-
-- Only 7K **(3K gzipped)** size.
-- Made 100% in React, no porting.
-- No dependencies.
-- Using native browser snap option.
-- Flexible SnapList component that can be used for a Carousel and a lot more.
-- No magic, you get the control.
-
-## Install
-
-```bash
-npm install --save react-snaplist-carousel
-```
-
-## Basic Example
-
-```tsx
-import * as React from 'react';
-
-import { SnapList, SnapItem } from 'react-snaplist-carousel';
-
-const MyItem = ({ children }) => (
-  <div style={{ width: '70vw', height: 200, background: '#cccccc' }}>{children}</div>
-);
-
-export const App = () => (
-  <SnapList>
-    <SnapItem paddingLeft="15px" paddingRight="15px" snapAlign="center">
-      <MyItem>Item 0</MyItem>
-    </SnapItem>
-    <SnapItem paddingLeft="15px" paddingRight="15px" snapAlign="center">
-      <MyItem>Item 1</MyItem>
-    </SnapItem>
-    <SnapItem paddingLeft="15px" paddingRight="15px" snapAlign="center">
-      <MyItem>Item 2</MyItem>
-    </SnapItem>
-    <SnapItem paddingLeft="15px" paddingRight="15px" snapAlign="center">
-      <MyItem>Item 3</MyItem>
-    </SnapItem>
-    <SnapItem paddingLeft="15px" paddingRight="15px" snapAlign="center">
-      <MyItem>Item 4</MyItem>
-    </SnapItem>
-  </SnapList>
-);
-```
-
-## Advanced Example
-
-```tsx
 import React, { useRef } from 'react';
 
 import { SnapList, SnapItem, useVisibleElements, useScroll } from 'react-snaplist-carousel';
@@ -104,8 +52,3 @@ export const App = () => {
     </SnapList>
   );
 };
-```
-
-## License
-
-MIT © [luispuig](https://github.com/luispuig)

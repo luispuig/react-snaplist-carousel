@@ -19,6 +19,7 @@ const toArray = ($items: HTMLCollection) => {
 export const useScroll = ({ ref, duration = 800 }: { ref: RefObject<any>; duration?: number }) => {
   const getScrollFor = (element: number) => {
     const $viewport: HTMLElement = ref.current;
+    if (!$viewport) return;
     const $items = toArray($viewport.children);
     const $item = element >= 0 && $items.length ? $items[element] : null;
     if (!$item) return;
