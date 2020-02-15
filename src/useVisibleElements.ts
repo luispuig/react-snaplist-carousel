@@ -16,10 +16,14 @@ const debounceHOF = (callback: () => void, ms: number) => {
 export const getVisibleChildren = ($viewport?: HTMLDivElement | null) => {
   if (!$viewport) return [];
   const viewport = {
-    from: $viewport.scrollLeft,
+    left: $viewport.scrollLeft,
     width: $viewport.offsetWidth,
-    to: $viewport.scrollLeft + $viewport.offsetWidth,
+    right: $viewport.scrollLeft + $viewport.offsetWidth,
+    top: $viewport.scrollTop,
+    height: $viewport.offsetHeight,
+    bottom: $viewport.scrollTop + $viewport.offsetHeight,
     offsetLeft: $viewport.offsetLeft,
+    offsetTop: $viewport.offsetTop,
   };
   const children = [];
   const $items = $viewport.children;
@@ -27,12 +31,13 @@ export const getVisibleChildren = ($viewport?: HTMLDivElement | null) => {
   for (let index = 0; index < $items.length; index++) {
     const $item = $items[index] as HTMLElement;
     const item = mapItem({ $item, viewport });
-    const isVisible = item.from >= viewport.from && item.to <= viewport.to;
-    if (isVisible) {
+    const isVisibleHorizontally = item.left >= viewport.left && item.right <= viewport.right;
+    const isVisibleVertically = item.top >= viewport.top && item.bottom <= viewport.bottom;
+    console.log(index, viewport, item);
+    if (isVisibleHorizontally && isVisibleVertically) {
       children.push(index);
     }
   }
-
   return children;
 };
 

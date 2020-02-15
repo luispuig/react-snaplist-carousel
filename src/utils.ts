@@ -8,15 +8,26 @@ export const mapStyles = ($item: HTMLElement) => {
   const styles = window.getComputedStyle($item) as Styles;
   const paddingLeft = parseInt(styles.paddingLeft || '');
   const paddingRight = parseInt(styles.paddingRight || '');
+  const paddingTop = parseInt(styles.paddingTop || '');
+  const paddingBottom = parseInt(styles.paddingBottom || '');
   const [snapAlign] = styles.scrollSnapAlign.split(' ');
-  return { paddingLeft, paddingRight, snapAlign };
+  return { paddingLeft, paddingRight, paddingTop, paddingBottom, snapAlign };
 };
 
-export const mapItem = ({ $item, viewport }: { $item: HTMLElement; viewport: { offsetLeft: number } }) => {
-  const { paddingLeft, paddingRight, snapAlign } = mapStyles($item);
-  const from = $item.offsetLeft - viewport.offsetLeft + paddingLeft;
+export const mapItem = ({
+  $item,
+  viewport,
+}: {
+  $item: HTMLElement;
+  viewport: { offsetLeft: number; offsetTop: number };
+}) => {
+  const { paddingLeft, paddingRight, paddingTop, paddingBottom, snapAlign } = mapStyles($item);
+  const left = $item.offsetLeft - viewport.offsetLeft + paddingLeft;
   const width = $item.offsetWidth - paddingRight;
-  const to = from + width;
+  const right = left + width;
+  const top = $item.offsetTop - viewport.offsetTop + paddingTop;
+  const height = $item.offsetHeight - paddingBottom;
+  const bottom = top + height;
 
-  return { from, width, to, paddingLeft, paddingRight, snapAlign };
+  return { left, width, right, top, height, bottom, paddingLeft, paddingRight, paddingTop, paddingBottom, snapAlign };
 };
