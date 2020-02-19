@@ -1,18 +1,23 @@
+<img alt="react-snaplist-carousel" src="readme/snaplist.png?raw=true" width="180px" />
+
 # react-snaplist-carousel
 
-The lightest modern carousel for your React apps.
+A modern React snaplist that can work as a carousel and much more!
 
 - Only 7K **(3K gzipped)** size.
 - Made 100% in React, no porting.
 - No dependencies.
 - Using native browser snap option.
-- Flexible SnapList component that can be used for a Carousel and a lot more.
 - No magic, you get the control.
 
 ## Install
 
 ```bash
 npm install --save react-snaplist-carousel
+```
+
+```tsx
+import { SnapList, SnapItem, useVisibleElements, useScroll } from 'react-snaplist-carousel';
 ```
 
 ## Basic Example
@@ -22,11 +27,7 @@ import * as React from 'react';
 
 import { SnapList, SnapItem } from 'react-snaplist-carousel';
 
-const MyItem = ({ children }) => (
-  <div style={{ width: '70vw', height: 200, background: '#cccccc' }}>
-    {children}
-  </div>
-);
+const MyItem = ({ children }) => <div style={{ width: '70vw', height: 200, background: '#cccccc' }}>{children}</div>;
 
 export const App = () => (
   <SnapList>
@@ -54,12 +55,7 @@ export const App = () => (
 ```tsx
 import React, { useRef } from 'react';
 
-import {
-  SnapList,
-  SnapItem,
-  useVisibleElements,
-  useScroll,
-} from 'react-snaplist-carousel';
+import { SnapList, SnapItem, useVisibleElements, useScroll } from 'react-snaplist-carousel';
 
 const MyItem = ({ onClick, children, visible }) => (
   <div
@@ -78,10 +74,7 @@ const MyItem = ({ onClick, children, visible }) => (
 export const App = () => {
   const snapList = useRef(null);
 
-  const visible = useVisibleElements(
-    { debounce: 10, ref: snapList },
-    ([element]) => element,
-  );
+  const visible = useVisibleElements({ debounce: 10, ref: snapList }, ([element]) => element);
   const goTo = useScroll({ ref: snapList });
 
   return (
