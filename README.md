@@ -7,6 +7,7 @@ A modern React snaplist that can work as a carousel and much more!
 - Only 7K **(3K gzipped)** size.
 - Made 100% in React, no porting.
 - No dependencies.
+- Typescript ready.
 - Using native browser snap option.
 - No magic, you get the control.
 
@@ -125,6 +126,56 @@ export const App = () => {
   );
 };
 ```
+
+## Options
+
+### SnapList
+
+- `direction` { horizontal | vertical }: Scroll direction. \*
+- `disableScroll` { boolean | undefined }: Disable the native scroll on swipe or mouse wheel.
+- `ref` { React.RefObject\<HTMLDivElement\> | undefined }: The React.ref to the element required by the hooks.
+
+\* _Required fields_
+
+### SnapItem
+
+- `snapAlign` { start | center | end | none }: The box’s snap position when the scroll stops. See [scroll-snap-align](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-align) for more information \*
+- `disableScroll` { boolean | undefined }: Avoid the scroll to "pass over" possible snap positions. See [scroll-snap-stop](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-stop) for more information
+- `padding` { {
+  top?: string;
+  right?: string;
+  bottom?: string;
+  left?: string;
+  } | undefined }: The padding use to set the separation between the items. You can use different padding for the first and last item for special cases.
+
+\* _Required fields_
+
+### useScroll
+
+```jsx
+const snapList = useRef(null);
+const goToElement = useScroll({ref: snapList})
+
+<SnapList ref={snapList}>
+  <SnapItem snapAlign="left">
+    <div onClick={() => goTo(0)}>Item 0</div>
+  </SnapItem>
+  <SnapItem snapAlign="left">
+    <div onClick={() => goTo(1)}>Item 1</div>
+  </SnapItem>
+</SnapList>
+```
+
+Response
+
+- A function `(element:number) => void` to scroll to the element.
+
+Arguments
+
+- `ref`: { React.RefObject\<HTMLDivElement\> } \*
+- `duration`: { number }. Optional (default 800). This duration is used for the browsers without support of [ScrollBehavior](https://developer.mozilla.org/en-US/docs/Web/API/ScrollToOptions/behavior) \*
+
+\* _Required fields_
 
 ## License
 
