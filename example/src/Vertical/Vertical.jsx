@@ -25,27 +25,27 @@ export const Vertical = () => {
   return (
     <div style={{ height: '100vh' }}>
       <SnapList ref={snapList} direction="vertical">
-        <SnapItem paddingTop="0" paddingBottom="1px" snapAlign="start">
+        <SnapItem padding={{ top: '0px', bottom: '1px' }} snapAlign="start">
           <Item onClick={() => goTo(0)} visible={visible === 0}>
             Item 0
           </Item>
         </SnapItem>
-        <SnapItem paddingTop="0" paddingBottom="1px" snapAlign="start">
+        <SnapItem padding={{ top: '0px', bottom: '1px' }} snapAlign="start">
           <Item onClick={() => goTo(1)} visible={visible === 1}>
             Item 1
           </Item>
         </SnapItem>
-        <SnapItem paddingTop="0" paddingBottom="1px" snapAlign="start">
+        <SnapItem padding={{ top: '0px', bottom: '1px' }} snapAlign="start">
           <Item onClick={() => goTo(2)} visible={visible === 2}>
             Item 2
           </Item>
         </SnapItem>
-        <SnapItem paddingTop="0" paddingBottom="1px" snapAlign="start">
+        <SnapItem padding={{ top: '0px', bottom: '1px' }} snapAlign="start">
           <Item onClick={() => goTo(3)} visible={visible === 3}>
             Item 3
           </Item>
         </SnapItem>
-        <SnapItem paddingTop="0" paddingBottom="40vh" snapAlign="start">
+        <SnapItem padding={{ top: '0px', bottom: '40vh' }} snapAlign="start">
           <Item onClick={() => goTo(4)} visible={visible === 4}>
             Item 4
           </Item>

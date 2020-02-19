@@ -33,7 +33,6 @@ export const getVisibleChildren = ($viewport?: HTMLDivElement | null) => {
     const item = mapItem({ $item, viewport });
     const isVisibleHorizontally = item.left >= viewport.left && item.right <= viewport.right;
     const isVisibleVertically = item.top >= viewport.top && item.bottom <= viewport.bottom;
-    console.log(index, viewport, item);
     if (isVisibleHorizontally && isVisibleVertically) {
       children.push(index);
     }

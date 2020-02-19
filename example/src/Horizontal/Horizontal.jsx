@@ -24,27 +24,27 @@ export const Horizontal = () => {
 
   return (
     <SnapList ref={snapList} direction="horizontal">
-      <SnapItem paddingLeft="20vw" paddingRight="15px" snapAlign="center">
+      <SnapItem padding={{ left: '20vw', right: '15px' }} snapAlign="center">
         <Item onClick={() => goTo(0)} visible={visible === 0}>
           Item 0
         </Item>
       </SnapItem>
-      <SnapItem paddingLeft="15px" paddingRight="15px" snapAlign="center">
+      <SnapItem padding={{ left: '15px', right: '15px' }} snapAlign="center">
         <Item onClick={() => goTo(1)} visible={visible === 1}>
           Item 1
         </Item>
       </SnapItem>
-      <SnapItem paddingLeft="15px" paddingRight="15px" snapAlign="center">
+      <SnapItem padding={{ left: '15px', right: '15px' }} snapAlign="center">
         <Item onClick={() => goTo(2)} visible={visible === 2}>
           Item 2
         </Item>
       </SnapItem>
-      <SnapItem paddingLeft="15px" paddingRight="15px" snapAlign="center">
+      <SnapItem padding={{ left: '15px', right: '15px' }} snapAlign="center">
         <Item onClick={() => goTo(3)} visible={visible === 3}>
           Item 3
         </Item>
       </SnapItem>
-      <SnapItem paddingLeft="15px" paddingRight="20vw" snapAlign="center">
+      <SnapItem padding={{ left: '15px', right: '20vw' }} snapAlign="center">
         <Item onClick={() => goTo(4)} visible={visible === 4}>
           Item 4
         </Item>

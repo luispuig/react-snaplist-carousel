@@ -4,6 +4,6 @@ import { Vertical } from './Vertical';
 
 export const App = () => (
   <div>
-    <Vertical />
+    <Horizontal />
   </div>
 );

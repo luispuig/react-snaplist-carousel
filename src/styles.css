@@ -39,8 +39,6 @@
   flex: 1;
   display: flex;
   flex-grow: initial;
-  padding-left: 15px;
-  padding-right: 15px;
   scroll-snap-align: center;
 }
 
