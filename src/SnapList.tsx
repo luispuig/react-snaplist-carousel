@@ -5,18 +5,18 @@ import styles from './styles.css';
 
 interface CarouselProps {
   direction: 'horizontal' | 'vertical';
-  enableSwipe?: boolean;
+  disableScroll?: boolean;
 }
 
 const SnapListComponent: React.FC<CarouselProps> = (
-  { children, direction = 'horizontal', enableSwipe = true },
+  { children, direction = 'horizontal', disableScroll = false },
   ref: React.Ref<HTMLDivElement>,
 ) => (
   <div
     className={mergeStyles(
       styles.snaplist,
       styles[`snaplist_${direction}`],
-      enableSwipe ? styles[`snaplist_swipe_${direction}`] : styles.snaplist_noswipe,
+      disableScroll ? styles.snaplist_scroll_disabled : styles[`snaplist_scroll_${direction}`],
     )}
     ref={ref}
   >
