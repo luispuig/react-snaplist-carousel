@@ -139,8 +139,8 @@ export const App = () => {
 
 ### SnapItem
 
-- `snapAlign` { start | center | end | none }: The box’s snap position when the scroll stops. See [scroll-snap-align](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-align) for more information \*
-- `disableScroll` { boolean | undefined }: Avoid the scroll to "pass over" possible snap positions. See [scroll-snap-stop](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-stop) for more information
+- `snapAlign` { start | center | end | none }: The box’s snap position when the scroll stops. See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-align" target="_blank">scroll-snap-align</a> for more information \*
+- `disableScroll` { boolean | undefined }: Avoid the scroll to "pass over" possible snap positions. See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-stop" target="_blank">scroll-snap-stop</a> for more information
 - `padding` { {
   top?: string;
   right?: string;
@@ -173,7 +173,7 @@ Response
 Arguments
 
 - `ref`: { React.RefObject\<HTMLDivElement\> } \*
-- `duration`: { number }. Optional (default 800). This duration is used for the browsers without support of [ScrollBehavior](https://developer.mozilla.org/en-US/docs/Web/API/ScrollToOptions/behavior) \*
+- `duration`: { number }. Optional (default 800). This duration is used for the browsers without support of <a href="https://developer.mozilla.org/en-US/docs/Web/API/ScrollToOptions/behavior" target="_blank">ScrollBehavior</a> \*
 
 \* _Required fields_
 
