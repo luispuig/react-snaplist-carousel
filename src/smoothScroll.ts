@@ -1,14 +1,19 @@
 const easingOutQuint = (t: number, b: number, c: number, d: number) => c * ((t = t / d - 1) * t * t * t * t + 1) + b;
 
-const smoothScrollPolyfill = (
-  node: HTMLDivElement,
-  key: 'scrollLeft' | 'scrollTop',
-  target: number,
-  duration: number,
-) => {
+const smoothScrollPolyfill = ({
+  node,
+  scrollTarget,
+  duration,
+}: {
+  node: HTMLDivElement;
+  scrollTarget: { left: number; top: number };
+  duration: number;
+}) => {
   const startTime = Date.now();
-  const offset = node[key];
-  const gap = target - offset;
+  const offsetLeft = node.scrollLeft;
+  const offsetTop = node.scrollTop;
+  const gapHorizontal = scrollTarget.left - offsetLeft;
+  const gapVertical = scrollTarget.top - offsetTop;
   let interrupt = false;
 
   const cleanup = () => {
@@ -24,7 +29,8 @@ const smoothScrollPolyfill = (
       cleanup();
       return;
     }
-    node[key] = easingOutQuint(elapsed, offset, gap, duration);
+    node.scrollLeft = easingOutQuint(elapsed, offsetLeft, gapHorizontal, duration);
+    node.scrollTop = easingOutQuint(elapsed, offsetTop, gapVertical, duration);
     requestAnimationFrame(step);
   };
 
@@ -57,14 +63,20 @@ const hasNativeSmoothScroll = () => {
   return supports;
 };
 
-export const smoothScroll = (node: HTMLDivElement | null, topOrLeft: number, horizontal = true, duration: number) => {
+export const smoothScroll = (
+  node: HTMLDivElement | null,
+  scrollTarget: { left: number; top: number },
+  duration: number,
+) => {
   if (!node) return;
+  console.log(scrollTarget);
   if (hasNativeSmoothScroll()) {
     return node.scrollTo({
-      [horizontal ? 'left' : 'top']: topOrLeft,
+      left: scrollTarget.left,
+      top: scrollTarget.top,
       behavior: 'smooth',
     });
   } else {
-    return smoothScrollPolyfill(node, horizontal ? 'scrollLeft' : 'scrollTop', topOrLeft, duration);
+    return smoothScrollPolyfill({ node, scrollTarget, duration });
   }
 };

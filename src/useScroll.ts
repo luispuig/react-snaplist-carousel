@@ -17,7 +17,14 @@ const toArray = ($items: HTMLCollection) => {
   return children;
 };
 export const useScroll = ({ ref, duration = 800 }: { ref: RefObject<any>; duration?: number }) => {
-  const getScrollFor = (element: number) => {
+  const getScrollFor = (
+    element: number,
+  ):
+    | {
+        left: number;
+        top: number;
+      }
+    | undefined => {
     const $viewport: HTMLElement = ref.current;
     if (!$viewport) return;
     const $items = toArray($viewport.children);
@@ -25,33 +32,48 @@ export const useScroll = ({ ref, duration = 800 }: { ref: RefObject<any>; durati
     if (!$item) return;
 
     const viewport = {
-      from: $viewport.scrollLeft,
+      left: $viewport.scrollLeft,
       width: $viewport.offsetWidth,
-      to: $viewport.scrollLeft + $viewport.offsetWidth,
+      right: $viewport.scrollLeft + $viewport.offsetWidth,
+      top: $viewport.scrollTop,
+      height: $viewport.offsetHeight,
+      bottom: $viewport.scrollTop + $viewport.offsetHeight,
       offsetLeft: $viewport.offsetLeft,
+      offsetTop: $viewport.offsetTop,
       paddingLeft: mapStyles($items[0]).paddingLeft,
       paddingRight: mapStyles($items[$items.length - 1]).paddingRight,
+      paddingTop: mapStyles($items[0]).paddingTop,
+      paddingBottom: mapStyles($items[$items.length - 1]).paddingBottom,
     };
 
     const item = mapItem({ $item, viewport });
 
     switch (item.snapAlign) {
       case 'start':
-        return item.from - item.paddingLeft - viewport.paddingLeft;
+        return {
+          left: item.left - item.paddingLeft - viewport.paddingLeft,
+          top: item.top - item.paddingTop - viewport.paddingTop,
+        };
       case 'end':
-        return item.from - (viewport.width - item.width) + viewport.paddingRight;
+        return {
+          left: item.left - (viewport.width - item.width) + viewport.paddingRight,
+          top: item.top - (viewport.height - item.height) + viewport.paddingBottom,
+        };
       case 'center':
-        return item.from - (viewport.width - item.width) / 2;
+        return {
+          left: item.left - (viewport.width - item.width) / 2,
+          top: item.top - (viewport.height - item.height) / 2,
+        };
 
       default:
-        return;
+        return { left: 0, top: 0 };
     }
   };
 
   const goTo = async (element: number) => {
     const scrollTarget = getScrollFor(element);
     if (scrollTarget) {
-      smoothScroll(ref.current, scrollTarget, true, duration);
+      smoothScroll(ref.current, scrollTarget, duration);
       await delay(duration);
     }
   };

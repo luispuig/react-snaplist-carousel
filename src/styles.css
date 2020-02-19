@@ -1,13 +1,34 @@
 .snaplist {
-  display: flex;
   flex: 1;
-  max-width: 100%;
-  scroll-snap-type: x mandatory;
-  flex-direction: row;
-  overflow-y: hidden;
-  overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+}
+
+.snaplist_horizontal {
+  display: flex;
+  flex-direction: row;
+  scroll-snap-type: x mandatory;
+  max-width: 100%;
+}
+
+.snaplist_vertical {
+  scroll-snap-type: y mandatory;
+  max-height: 100%;
+}
+
+.snaplist_noswipe {
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.snaplist_swipe_horizontal {
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+.snaplist_swipe_vertical {
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .snaplist::-webkit-scrollbar {
@@ -23,19 +44,19 @@
   scroll-snap-align: center;
 }
 
-.snapitem_center {
+.snapitem_align_center {
   scroll-snap-align: center;
 }
 
-.snapitem_start {
+.snapitem_align_start {
   scroll-snap-align: start;
 }
 
-.snapitem_end {
+.snapitem_align_end {
   scroll-snap-align: end;
 }
 
-.snapitem_none {
+.snapitem_align_none {
   scroll-snap-align: none;
 }
 

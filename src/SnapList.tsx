@@ -1,12 +1,25 @@
 import * as React from 'react';
-import { combineClassnames as c } from './utils';
+import { mergeStyles } from './utils';
 
 import styles from './styles.css';
 
-interface CarouselProps {}
+interface CarouselProps {
+  direction: 'horizontal' | 'vertical';
+  enableSwipe?: boolean;
+}
 
-const SnapListComponent: React.FC<CarouselProps> = ({ children }, ref: React.Ref<HTMLDivElement>) => (
-  <div className={styles.snaplist} ref={ref}>
+const SnapListComponent: React.FC<CarouselProps> = (
+  { children, direction = 'horizontal', enableSwipe = true },
+  ref: React.Ref<HTMLDivElement>,
+) => (
+  <div
+    className={mergeStyles(
+      styles.snaplist,
+      styles[`snaplist_${direction}`],
+      enableSwipe ? styles[`snaplist_swipe_${direction}`] : styles.snaplist_noswipe,
+    )}
+    ref={ref}
+  >
     {children}
   </div>
 );
@@ -18,13 +31,27 @@ export const SnapList = React.forwardRef<HTMLDivElement, WithChildren<CarouselPr
 export const SnapItem: React.FC<{
   paddingLeft?: string;
   paddingRight?: string;
+  paddingTop?: string;
+  paddingBottom?: string;
   snapAlign: 'start' | 'center' | 'end' | 'none';
   forceStop?: boolean;
-}> = ({ children, paddingLeft = '0px', paddingRight = '0px', snapAlign = 'center', forceStop = false }) => {
-  const style = { paddingLeft, paddingRight };
+}> = ({
+  children,
+  paddingLeft = '0px',
+  paddingRight = '0px',
+  paddingTop = '0px',
+  paddingBottom = '0px',
+  snapAlign = 'center',
+  forceStop = false,
+}) => {
+  const style = { paddingLeft, paddingRight, paddingTop, paddingBottom };
   return (
     <div
-      className={c(styles.snapitem, styles[`snapitem_${snapAlign}`], forceStop ? styles.snapitem_forcestop : null)}
+      className={mergeStyles(
+        styles.snapitem,
+        styles[`snapitem_align_${snapAlign}`],
+        forceStop ? styles.snapitem_forcestop : null,
+      )}
       style={style}
     >
       {children}
