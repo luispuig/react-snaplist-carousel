@@ -21,8 +21,7 @@
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build",
     "linter": "tsc --project ./tsconfig.json && eslint './src/**/*.{ts,tsx,.js,.jsx}'",
-    "precommit": "lint-staged",
-    "prepush": "npm run linter && CI=true npm test"
+    "precommit": "lint-staged"
   },
   "dependencies": {},
   "peerDependencies": {
@@ -91,8 +90,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run precommit",
-      "pre-push": "npm run prepush"
+      "pre-commit": "npm run precommit"
     }
   }
 }
