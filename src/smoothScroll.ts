@@ -69,7 +69,6 @@ export const smoothScroll = (
   duration: number,
 ) => {
   if (!node) return;
-  console.log(scrollTarget);
   if (hasNativeSmoothScroll()) {
     return node.scrollTo({
       left: scrollTarget.left,

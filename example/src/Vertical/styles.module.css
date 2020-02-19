@@ -1,0 +1,7 @@
+.item {
+  height: 60vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

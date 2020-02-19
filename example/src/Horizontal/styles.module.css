@@ -1,0 +1,11 @@
+.wrapper {
+  margin-top: 10vh;
+}
+
+.item {
+  width: 60vw;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
