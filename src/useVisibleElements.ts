@@ -42,7 +42,7 @@ export const getVisibleChildren = ($viewport?: HTMLDivElement | null) => {
 
 export const useVisibleElements = <T>(
   {
-    debounce = 100,
+    debounce = 10,
     ref,
   }: {
     ref: RefObject<HTMLDivElement>;
