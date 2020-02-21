@@ -4,12 +4,12 @@
 
 A modern React snaplist that can work as a carousel and much more!
 
-- Only 7K **(3K gzipped)** size.
+- Less than **3K gzipped** size.
 - Made 100% in React, no porting.
 - No dependencies.
 - Typescript ready.
-- Using native browser snap option.
-- No magic, you get the control.
+- Uses native browser snap option.
+- No magic, you get the control thanks to the hooks.
 
 ## Install
 
@@ -93,32 +93,32 @@ export const App = () => {
     { debounce: 10, ref: snapList },
     ([element]) => element,
   );
-  const goTo = useScroll({ ref: snapList });
+  const goToSnapItem = useScroll({ ref: snapList });
 
   return (
     <SnapList ref={snapList}>
       <SnapItem padding={{ left: '20vw', right: '15px' }} snapAlign="center">
-        <MyItem onClick={() => goTo(0)} visible={visible === 0}>
+        <MyItem onClick={() => goToSnapItem(0)} visible={visible === 0}>
           Item 0
         </MyItem>
       </SnapItem>
       <SnapItem padding={{ left: '15px', right: '15px' }} snapAlign="center">
-        <MyItem onClick={() => goTo(1)} visible={visible === 1}>
+        <MyItem onClick={() => goToSnapItem(1)} visible={visible === 1}>
           Item 1
         </MyItem>
       </SnapItem>
       <SnapItem padding={{ left: '15px', right: '15px' }} snapAlign="center">
-        <MyItem onClick={() => goTo(2)} visible={visible === 2}>
+        <MyItem onClick={() => goToSnapItem(2)} visible={visible === 2}>
           Item 2
         </MyItem>
       </SnapItem>
       <SnapItem padding={{ left: '15px', right: '15px' }} snapAlign="center">
-        <MyItem onClick={() => goTo(3)} visible={visible === 3}>
+        <MyItem onClick={() => goToSnapItem(3)} visible={visible === 3}>
           Item 3
         </MyItem>
       </SnapItem>
       <SnapItem padding={{ left: '15px', right: '20vw' }} snapAlign="center">
-        <MyItem onClick={() => goTo(4)} visible={visible === 4}>
+        <MyItem onClick={() => goToSnapItem(4)} visible={visible === 4}>
           Item 4
         </MyItem>
       </SnapItem>
@@ -154,16 +154,18 @@ export const App = () => {
 
 ```jsx
 const snapList = useRef(null);
-const goToElement = useScroll({ref: snapList})
+const goToElement = useScroll({ ref: snapList });
 
-<SnapList ref={snapList}>
-  <SnapItem snapAlign="left">
-    <div onClick={() => goTo(0)}>Item 0</div>
-  </SnapItem>
-  <SnapItem snapAlign="left">
-    <div onClick={() => goTo(1)}>Item 1</div>
-  </SnapItem>
-</SnapList>
+return (
+  <SnapList ref={snapList}>
+    <SnapItem snapAlign="left">
+      <div onClick={() => goTo(0)}>Item 0</div>
+    </SnapItem>
+    <SnapItem snapAlign="left">
+      <div onClick={() => goTo(1)}>Item 1</div>
+    </SnapItem>
+  </SnapList>
+);
 ```
 
 Response
@@ -176,6 +178,53 @@ Arguments
 - `duration`: { number }. Optional (default 800). This duration is used for the browsers without support of <a href="https://developer.mozilla.org/en-US/docs/Web/API/ScrollToOptions/behavior" target="_blank">ScrollBehavior</a> \*
 
 \* _Required fields_
+
+### useVisibleElements
+
+```jsx
+const snapList = useRef(null);
+const selected = useVisibleElements(
+  { ref: snapList, debounce: 10 },
+  elements => elements[0],
+);
+
+return (
+  <SnapList ref={snapList}>
+    <SnapItem snapAlign="left">
+      <div
+        onClick={() => goTo(0)}
+        style={{
+          backgroundColor: selected === 0 ? 'papayawhip' : null,
+        }}
+      >
+        Item 0
+      </div>
+    </SnapItem>
+    <SnapItem snapAlign="left">
+      <div
+        onClick={() => goTo(1)}
+        style={{
+          backgroundColor: selected === 1 ? 'papayawhip' : null,
+        }}
+      >
+        Item 1
+      </div>
+    </SnapItem>
+  </SnapList>
+);
+```
+
+Arguments
+
+- `ref`: { React.RefObject\<HTMLDivElement\> } \*
+- `debounce`: { number }. Optional (default 10). The time that the scroll is stopped before firing the visible elements check.
+- `selectorFunction`: { (element:number[]) => any }. This selector gets an array of the visible elements as an argument and the return value will be returned by the useVisibleElements. Use this function to add some logic like select only the first one, calculate if there hidden elements before or later, etc... \*
+
+\* _Required fields_
+
+Tip
+
+Use many times `useVisibleElements` hook with different `debounce` values for different purposes. For instance with a SnapList to select one option, one with debounce 10 for the slider dots animation or the selected option background and another one with debounce 100 to fire a select sideEffect.
 
 ## License
 
