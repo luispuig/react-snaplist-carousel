@@ -6,10 +6,12 @@ import styles from './styles.css';
 interface CarouselProps {
   direction: 'horizontal' | 'vertical';
   disableScroll?: boolean;
+  width?: string;
+  height?: string;
 }
 
 const SnapListComponent: React.FC<CarouselProps> = (
-  { children, direction = 'horizontal', disableScroll = false },
+  { children, direction = 'horizontal', disableScroll = false, width, height },
   ref: React.Ref<HTMLDivElement>,
 ) => (
   <div
@@ -18,6 +20,7 @@ const SnapListComponent: React.FC<CarouselProps> = (
       styles[`snaplist_${direction}`],
       disableScroll ? styles.snaplist_scroll_disabled : styles[`snaplist_scroll_${direction}`],
     )}
+    style={{ width, height }}
     ref={ref}
   >
     {children}
@@ -35,9 +38,11 @@ export const SnapItem: React.FC<{
     bottom?: string;
     left?: string;
   };
+  width?: string;
+  height?: string;
   snapAlign: 'start' | 'center' | 'end' | 'none';
   forceStop?: boolean;
-}> = ({ children, padding, snapAlign = 'center', forceStop = false }) => (
+}> = ({ children, padding, snapAlign = 'center', forceStop = false, width, height }) => (
   <div
     className={mergeStyles(
       styles.snapitem,
@@ -49,6 +54,8 @@ export const SnapItem: React.FC<{
       paddingRight: padding?.right,
       paddingBottom: padding?.bottom,
       paddingLeft: padding?.left,
+      width,
+      height,
     }}
   >
     {children}
