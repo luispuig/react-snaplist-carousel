@@ -24,34 +24,32 @@ export const Horizontal = () => {
   const goTo = useScroll({ ref: snapList });
 
   return (
-    <div className={styles.wrapper}>
-      <SnapList ref={snapList} direction="horizontal">
-        <SnapItem padding={{ left: '15px', right: '15px' }} snapAlign="center">
-          <Item onClick={() => goTo(0)} visible={visible === 0}>
-            Item 0
-          </Item>
-        </SnapItem>
-        <SnapItem padding={{ left: '15px', right: '15px' }} snapAlign="center">
-          <Item onClick={() => goTo(1)} visible={visible === 1}>
-            Item 1
-          </Item>
-        </SnapItem>
-        <SnapItem padding={{ left: '15px', right: '15px' }} snapAlign="center">
-          <Item onClick={() => goTo(2)} visible={visible === 2}>
-            Item 2
-          </Item>
-        </SnapItem>
-        <SnapItem padding={{ left: '15px', right: '15px' }} snapAlign="center">
-          <Item onClick={() => goTo(3)} visible={visible === 3}>
-            Item 3
-          </Item>
-        </SnapItem>
-        <SnapItem padding={{ left: '15px', right: '15px' }} snapAlign="center">
-          <Item onClick={() => goTo(4)} visible={visible === 4}>
-            Item 4
-          </Item>
-        </SnapItem>
-      </SnapList>
-    </div>
+    <SnapList ref={snapList} direction="horizontal">
+      <SnapItem padding={{ left: '15px', right: '15px' }} width="60%" snapAlign="center">
+        <Item onClick={() => goTo(0)} visible={visible === 0}>
+          Item 0
+        </Item>
+      </SnapItem>
+      <SnapItem padding={{ left: '15px', right: '15px' }} width="60%" snapAlign="center">
+        <Item onClick={() => goTo(1)} visible={visible === 1}>
+          Item 1
+        </Item>
+      </SnapItem>
+      <SnapItem padding={{ left: '15px', right: '15px' }} width="60%" snapAlign="center">
+        <Item onClick={() => goTo(2)} visible={visible === 2}>
+          Item 2
+        </Item>
+      </SnapItem>
+      <SnapItem padding={{ left: '15px', right: '15px' }} width="60%" snapAlign="center">
+        <Item onClick={() => goTo(3)} visible={visible === 3}>
+          Item 3
+        </Item>
+      </SnapItem>
+      <SnapItem padding={{ left: '15px', right: '15px' }} width="60%" snapAlign="center">
+        <Item onClick={() => goTo(4)} visible={visible === 4}>
+          Item 4
+        </Item>
+      </SnapItem>
+    </SnapList>
   );
 };
