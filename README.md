@@ -2,7 +2,7 @@
 
 # react-snaplist-carousel
 
-A modern React snaplist that can work as a carousel and much more!
+A modern way to do a classic thing.
 
 - Less than **3K gzipped** size.
 - Made 100% in React, no porting.

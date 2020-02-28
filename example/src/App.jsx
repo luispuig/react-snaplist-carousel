@@ -1,11 +1,11 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { SnapList, SnapItem, useScroll } from 'react-snaplist-carousel';
 import { mergeStyles } from './utils';
+import { Frame } from './Frame';
+import { Menu } from './Menu';
 import { Horizontal } from './Horizontal';
 import { Vertical } from './Vertical';
-import { Frame } from './Frame';
 
-import logo from './Menu/snaplist.png';
 import styles from './App.module.css';
 
 const NavBar = ({ children }) => <div className={styles.topBar}>{children}</div>;
@@ -48,23 +48,7 @@ export const App = () => {
       </NavBar>
       <SnapList direction="horizontal" ref={snaplist} disableScroll height="100%">
         <SnapItem snapAlign="start" width="100%">
-          <div className={styles.menu}>
-            <div>
-              <img src={logo} alt="react-snaplist-carousel" width="120px" />
-              <br />
-              <b>snaplist</b>
-              <p>&nbsp;</p>
-            </div>
-            Examples
-            <ul>
-              <li className={mergeStyles(styles.link, styles.menuOption)} onClick={() => select(1)}>
-                Horizontal
-              </li>
-              <li className={mergeStyles(styles.link, styles.menuOption)} onClick={() => select(2)}>
-                Vertical
-              </li>
-            </ul>
-          </div>
+          <Menu onSelect={select} />
         </SnapItem>
         <SnapItem snapAlign="start" width="100%">
           <Horizontal />

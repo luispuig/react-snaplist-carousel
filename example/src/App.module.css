@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: flex-start;
   position: absolute;
+  z-index: 10;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.75);
 }
 
@@ -27,12 +28,4 @@ topBar * {
 
 .link:hover {
   text-decoration: underline;
-}
-
-.menu {
-  padding: 15px;
-}
-
-.menuOption {
-  padding: 3px 0;
 }
