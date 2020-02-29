@@ -18,7 +18,7 @@
 
 /* smartphones, touchscreens */
 /* https://medium.com/@ferie/detect-a-touch-device-with-only-css-9f8e30fa1134 */
-@media (hover: none) and (pointer: coarse) and (max-width: 650px) {
+@media (hover: none) and (pointer: coarse) {
   .wrapper {
     max-width: 100%;
     max-height: 100%;
