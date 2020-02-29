@@ -1,0 +1,65 @@
+.menu {
+  padding: 15px;
+}
+
+.menuOption {
+  padding: 3px 0;
+}
+
+.link {
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.menu {
+  width: 100%;
+  overflow-y: auto;
+  position: relative;
+}
+
+.header {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.github {
+  position: absolute;
+  z-index: 11;
+  top: 0;
+  right: 0;
+}
+
+.menu ul {
+ margin-top: 10px;
+ margin-bottom: 40px;
+}
+
+.menu ul li {
+margin-bottom: 5px;
+}
+
+.examples {
+  display: grid;
+  grid-template-columns: 25% 25% 25%;
+  grid-column-gap: 30px;
+  padding: 15px 20px 0;
+}
+
+.example {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.example img {
+  box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.51);
+}
+
+.exampleTitle {
+  text-align: center;
+  padding: 15px;
+}

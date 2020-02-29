@@ -11,7 +11,7 @@ const toArray = ($items: HTMLCollection) => {
   }
   return children;
 };
-export const useScroll = ({ ref, duration = 800 }: { ref: RefObject<any>; duration?: number }) => {
+export const useScroll = ({ ref }: { ref: RefObject<any> }) => {
   const getScrollFor = useCallback(
     (
       element: number,
@@ -72,10 +72,10 @@ export const useScroll = ({ ref, duration = 800 }: { ref: RefObject<any>; durati
     (element: number) => {
       const scrollTarget = getScrollFor(element);
       if (scrollTarget) {
-        smoothScroll(ref.current, scrollTarget, duration);
+        smoothScroll(ref.current, scrollTarget, 800);
       }
     },
-    [duration, getScrollFor, ref],
+    [getScrollFor, ref],
   );
 
   return goTo;

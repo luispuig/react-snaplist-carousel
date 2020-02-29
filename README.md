@@ -2,14 +2,28 @@
 
 # react-snaplist-carousel
 
-A modern React snaplist that can work as a carousel and much more!
+A modern way to do a classic thing.
 
 - Less than **3K gzipped** size.
 - Made 100% in React, no porting.
 - No dependencies.
 - Typescript ready.
-- Uses native browser snap option.
+- Using it in production.
+- Using native browser snap option.
 - No magic, you get the control thanks to the hooks.
+
+# Demo
+
+<p>
+  <img alt="react-snaplist-carousel" src="readme/horizontal.gif?raw=true" width="33%" />
+  <img alt="react-snaplist-carousel" src="readme/vertical.gif?raw=true" width="33%" />
+  <img alt="react-snaplist-carousel" src="readme/list.gif?raw=true" width="33%" /> 
+</p>
+<p>
+  <a href="https://luispuig.github.io/react-snaplist-carousel/" target="_blank">
+    LIVE DEMO
+  </a>
+</p>
 
 ## Install
 
@@ -133,7 +147,16 @@ export const App = () => {
 
 - `direction` { horizontal | vertical }: Scroll direction. \*
 - `disableScroll` { boolean | undefined }: Disable the native scroll on swipe or mouse wheel.
+- `width` { string | undefined }: Width CSS property
+- `height` { string | undefined }: Height CSS property
+- `scrollPadding` { {
+  top?: string;
+  right?: string;
+  bottom?: string;
+  left?: string;
+  } | undefined }: Use this to configure the space to see from the previous/next hidden element. See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding" target="_blank">scroll-padding</a> for more information
 - `ref` { React.RefObject\<HTMLDivElement\> | undefined }: The React.ref to the element required by the hooks.
+- `className` { string | undefined }: 🚑Please, use this only in case of emergency. It allows you to add/overwrite/extend all the CSS properties. If you need this, please consider opening an issue or contribute with a PR to cover your use case.
 
 \* _Required fields_
 
@@ -141,12 +164,15 @@ export const App = () => {
 
 - `snapAlign` { start | center | end | none }: The box’s snap position when the scroll stops. See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-align" target="_blank">scroll-snap-align</a> for more information \*
 - `disableScroll` { boolean | undefined }: Avoid the scroll to "pass over" possible snap positions. See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-stop" target="_blank">scroll-snap-stop</a> for more information
+- `width` { string | undefined }: Width CSS property
+- `height` { string | undefined }: Height CSS property
 - `padding` { {
   top?: string;
   right?: string;
   bottom?: string;
   left?: string;
-  } | undefined }: The padding use to set the separation between the items. You can use different padding for the first and last item for special cases.
+  } | undefined }: The padding use to set the separation between the items. You can use different padding for the first and last item to get better results.
+- `className` { string | undefined }: 🚑Please, use this only in case of emergency. It allows you to add/overwrite/extend all the CSS properties. If you need this, please consider opening an issue or contribute with a PR to cover your use case.
 
 \* _Required fields_
 
@@ -175,7 +201,6 @@ Response
 Arguments
 
 - `ref`: { React.RefObject\<HTMLDivElement\> } \*
-- `duration`: { number }. Optional (default 800). This duration is used for the browsers without support of <a href="https://developer.mozilla.org/en-US/docs/Web/API/ScrollToOptions/behavior" target="_blank">ScrollBehavior</a> \*
 
 \* _Required fields_
 
@@ -187,12 +212,13 @@ const selected = useVisibleElements(
   { ref: snapList, debounce: 10 },
   elements => elements[0],
 );
+const goToElement = useScroll({ ref: snapList });
 
 return (
   <SnapList ref={snapList}>
     <SnapItem snapAlign="left">
       <div
-        onClick={() => goTo(0)}
+        onClick={() => goToElement(0)}
         style={{
           backgroundColor: selected === 0 ? 'papayawhip' : null,
         }}
@@ -202,7 +228,7 @@ return (
     </SnapItem>
     <SnapItem snapAlign="left">
       <div
-        onClick={() => goTo(1)}
+        onClick={() => goToElement(1)}
         style={{
           backgroundColor: selected === 1 ? 'papayawhip' : null,
         }}
@@ -225,6 +251,16 @@ Arguments
 Tip
 
 Use many times `useVisibleElements` hook with different `debounce` values for different purposes. For instance with a SnapList to select one option, one with debounce 10 for the slider dots animation or the selected option background and another one with debounce 100 to fire a select sideEffect.
+
+
+## Do you want to contribute?
+- You can give a star to the project to help with the reputation
+- You can share it with your colleagues.
+- You can fork the repository and make your PR contribution.
+- You can explore using IntersectionObserver for the useVisible hook.
+- You can explore with better scrollTo polyfills. 
+- You can create usefull extra elements like Dots, Thumbnails, Progress or Arrows.
+- Yes, you can.
 
 ## License
 

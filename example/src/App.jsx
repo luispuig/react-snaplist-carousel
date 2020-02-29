@@ -1,24 +1,11 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { SnapList, SnapItem, useScroll } from 'react-snaplist-carousel';
-import { mergeStyles } from './utils';
+import { Frame } from './Frame';
+import { NavBar } from './NavBar';
+import { Menu } from './Menu';
 import { Horizontal } from './Horizontal';
 import { Vertical } from './Vertical';
-
-import logo from './Menu/snaplist.png';
-import styles from './App.module.css';
-
-const Example = ({ children, selected }) => (
-  <div className={mergeStyles(styles.fullScreen, !selected ? styles.fullScreenNoSelected : null)}>{children}</div>
-);
-Example.NavBar = ({ children }) => <div className={styles.topBar}>{children}</div>;
-Example.NavBar.Item = ({ children, onClick }) => (
-  <div onClick={() => onClick()} className={mergeStyles(styles.link, styles.topBarItem)}>
-    {children}
-  </div>
-);
-Example.Content = ({ children }) => <div className={styles.content}>{children}</div>;
-
-const MenuItem = ({ onClick }) => <Example.NavBar.Item onClick={onClick}>Menu</Example.NavBar.Item>;
+import { List } from './List';
 
 export const App = () => {
   const snaplist = useRef(null);
@@ -44,54 +31,22 @@ export const App = () => {
   }, [goToSelected]);
 
   return (
-    <div className={styles.fullScreen}>
-      <SnapList direction="vertical" ref={snaplist} disableScroll>
-        <SnapItem snapAlign="start">
-          <Example selected={selected === 0}>
-            <Example.Content>
-              <div className={styles.menu}>
-                <div align="center">
-                  <img src={logo} alt="react-snaplist-carousel" width="120px" />
-                  <br />
-                  <b>snaplist</b>
-                  <p>&nbsp;</p>
-                </div>
-                Examples
-                <ul>
-                  <li className={mergeStyles(styles.link, styles.menuOption)} onClick={() => select(1)}>
-                    Horizontal
-                  </li>
-                  <li className={mergeStyles(styles.link, styles.menuOption)} onClick={() => select(2)}>
-                    Vertical
-                  </li>
-                </ul>
-              </div>
-            </Example.Content>
-          </Example>
+    <Frame>
+      <NavBar show={selected > 0} selected={selected} onSelect={select} />
+      <SnapList direction="horizontal" ref={snaplist} disableScroll height="100%">
+        <SnapItem snapAlign="start" width="100%">
+          <Menu onSelect={select} />
         </SnapItem>
-        <SnapItem snapAlign="start">
-          <Example selected={selected === 1}>
-            <Example.NavBar>
-              <MenuItem onClick={() => select(0)} />
-              <Example.NavBar.Item onClick={() => select(2)}>Next</Example.NavBar.Item>
-            </Example.NavBar>
-            <Example.Content>
-              <Horizontal />
-            </Example.Content>
-          </Example>
+        <SnapItem snapAlign="start" width="100%">
+          <Horizontal />
         </SnapItem>
-        <SnapItem snapAlign="start">
-          <Example selected={selected === 2}>
-            <Example.NavBar>
-              <MenuItem onClick={() => select(0)} />
-              <Example.NavBar.Item onClick={() => select(1)}>Previous</Example.NavBar.Item>
-            </Example.NavBar>
-            <Example.Content>
-              <Vertical />
-            </Example.Content>
-          </Example>
+        <SnapItem snapAlign="start" width="100%">
+          <Vertical />
+        </SnapItem>
+        <SnapItem snapAlign="start" width="100%">
+          <List />
         </SnapItem>
       </SnapList>
-    </div>
+    </Frame>
   );
 };
