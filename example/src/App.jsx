@@ -1,20 +1,11 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { SnapList, SnapItem, useScroll } from 'react-snaplist-carousel';
-import { mergeStyles } from './utils';
 import { Frame } from './Frame';
+import { NavBar } from './NavBar';
 import { Menu } from './Menu';
 import { Horizontal } from './Horizontal';
 import { Vertical } from './Vertical';
-
-import styles from './App.module.css';
-
-const NavBar = ({ children }) => <div className={styles.topBar}>{children}</div>;
-NavBar.Item = ({ children, onClick }) => (
-  <div onClick={() => onClick()} className={mergeStyles(styles.link, styles.topBarItem)}>
-    {children}
-  </div>
-);
-const MenuItem = ({ onClick }) => <NavBar.Item onClick={onClick}>Menu</NavBar.Item>;
+import { List } from './List';
 
 export const App = () => {
   const snaplist = useRef(null);
@@ -41,11 +32,7 @@ export const App = () => {
 
   return (
     <Frame>
-      <NavBar>
-        <MenuItem onClick={() => select(0)} />
-        <NavBar.Item onClick={() => select(Math.max(0, selected - 1))}>Previous</NavBar.Item>
-        <NavBar.Item onClick={() => select(2, Math.min(selected + 1))}>Next</NavBar.Item>
-      </NavBar>
+      <NavBar show={selected > 0} selected={selected} onSelect={select} />
       <SnapList direction="horizontal" ref={snaplist} disableScroll height="100%">
         <SnapItem snapAlign="start" width="100%">
           <Menu onSelect={select} />
@@ -55,6 +42,9 @@ export const App = () => {
         </SnapItem>
         <SnapItem snapAlign="start" width="100%">
           <Vertical />
+        </SnapItem>
+        <SnapItem snapAlign="start" width="100%">
+          <List />
         </SnapItem>
       </SnapList>
     </Frame>

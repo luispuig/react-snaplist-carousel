@@ -39,7 +39,6 @@
   flex: 1;
   display: flex;
   flex-grow: initial;
-  scroll-snap-align: center;
   flex-shrink: 0;
   flex-basis: auto;
 }

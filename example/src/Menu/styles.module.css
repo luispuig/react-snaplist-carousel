@@ -15,7 +15,6 @@
 }
 
 .menu {
-  padding-top: 60px;
   width: 100%;
   overflow-y: auto;
   position: relative;
@@ -24,7 +23,7 @@
 .header {
   width: 100%;
   text-align: center;
-  padding-bottom: 15px;
+  padding-bottom: 30px;
 }
 
 .github {
@@ -45,8 +44,7 @@ margin-bottom: 5px;
 
 .examples {
   display: grid;
-  grid-column: 33% 33% auto;
-  grid-template-columns: 25% 25% 50%;
+  grid-template-columns: 25% 25% 25%;
   grid-column-gap: 30px;
   padding: 15px 20px 0;
 }
@@ -54,6 +52,7 @@ margin-bottom: 5px;
 .example {
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 
 .example img {

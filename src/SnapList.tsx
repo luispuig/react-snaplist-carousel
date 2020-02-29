@@ -8,10 +8,16 @@ interface CarouselProps {
   disableScroll?: boolean;
   width?: string;
   height?: string;
+  scrollPadding?: {
+    top?: string;
+    right?: string;
+    bottom?: string;
+    left?: string;
+  };
 }
 
 const SnapListComponent: React.FC<CarouselProps> = (
-  { children, direction = 'horizontal', disableScroll = false, width, height },
+  { children, direction = 'horizontal', disableScroll = false, width, height, scrollPadding },
   ref: React.Ref<HTMLDivElement>,
 ) => (
   <div
@@ -20,7 +26,14 @@ const SnapListComponent: React.FC<CarouselProps> = (
       styles[`snaplist_${direction}`],
       disableScroll ? styles.snaplist_scroll_disabled : styles[`snaplist_scroll_${direction}`],
     )}
-    style={{ width, height }}
+    style={{
+      width,
+      height,
+      scrollPaddingTop: scrollPadding?.top,
+      scrollPaddingRight: scrollPadding?.right,
+      scrollPaddingBottom: scrollPadding?.bottom,
+      scrollPaddingLeft: scrollPadding?.left,
+    }}
     ref={ref}
   >
     {children}

@@ -3,6 +3,7 @@ import logo from './snaplist.png';
 import github from './strip-github.png';
 import vertical from './vertical.gif';
 import horizontal from './horizontal.gif';
+import list from './list.gif';
 
 import styles from './styles.module.css';
 
@@ -40,6 +41,10 @@ export const Menu = ({ onSelect }) => {
         <div className={styles.example}>
           <img src={vertical} alt="vertical-example" width="100%" onClick={() => onSelect(2)}/>
           <div className={styles.exampleTitle}>Vertical</div>
+        </div>
+        <div className={styles.example}>
+          <img src={list} alt="list-example" width="100%" onClick={() => onSelect(3)}/>
+          <div className={styles.exampleTitle}>List</div>
         </div>
       </div>
     </div>
