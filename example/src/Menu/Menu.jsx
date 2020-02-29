@@ -29,6 +29,7 @@ export const Menu = ({ onSelect }) => {
         <li>Made 100% in React, no porting.</li>
         <li>No dependencies.</li>
         <li>Typescript ready.</li>
+        <li>Using it in production.</li>
         <li>Uses native browser snap option.</li>
         <li>No magic, you get the control thanks to the hooks.</li>
       </ul>
