@@ -14,7 +14,7 @@ const debounceHOF = (callback: () => void, ms: number) => {
 };
 
 export const getVisibleChildren = ($viewport?: HTMLDivElement | null) => {
-  if (!$viewport) return [];
+  if (!$viewport) return { children: [], childrenInCenter: null };
   const viewport = {
     left: $viewport.scrollLeft,
     width: $viewport.offsetWidth,
@@ -24,20 +24,27 @@ export const getVisibleChildren = ($viewport?: HTMLDivElement | null) => {
     bottom: $viewport.scrollTop + $viewport.offsetHeight,
     offsetLeft: $viewport.offsetLeft,
     offsetTop: $viewport.offsetTop,
+    centerHorizontal: $viewport.scrollLeft + $viewport.offsetWidth / 2,
+    centerVertical: $viewport.scrollTop + $viewport.offsetHeight / 2,
   };
   const children = [];
   const $items = $viewport.children;
-
+  let childrenInCenter = null;
   for (let index = 0; index < $items.length; index++) {
     const $item = $items[index] as HTMLElement;
     const item = mapItem({ $item, viewport });
     const isVisibleHorizontally = item.left >= viewport.left && item.right <= viewport.right;
     const isVisibleVertically = item.top >= viewport.top && item.bottom <= viewport.bottom;
+    const isInCenterHorizontally = item.left <= viewport.centerHorizontal && item.right >= viewport.centerHorizontal;
+    const isInCenterVertically = item.top <= viewport.centerVertical && item.bottom >= viewport.centerVertical;
     if (isVisibleHorizontally && isVisibleVertically) {
       children.push(index);
     }
+    if (isInCenterHorizontally && isInCenterVertically) {
+      childrenInCenter = index;
+    }
   }
-  return children;
+  return { children, childrenInCenter };
 };
 
 export const useVisibleElements = <T>(
@@ -48,16 +55,20 @@ export const useVisibleElements = <T>(
     ref: RefObject<HTMLDivElement>;
     debounce?: number;
   },
-  selector: (elements: number[]) => T,
+  selector: (elements: number[], childrenInCenter: number | null) => T,
 ): T => {
   const [visibleChildren, setVisibleChildren] = useState<number[]>([0]);
+  const [childrenInCenter, setChildrenInCenter] = useState<number | null>(null);
 
   const onChange = useCallback(() => {
-    const newVisibleChildren = getVisibleChildren(ref.current);
+    const { children: newVisibleChildren, childrenInCenter: newChildrenInCenter } = getVisibleChildren(ref.current);
     setVisibleChildren((visibleChildren: number[]) => {
       return newVisibleChildren.length > 0 && JSON.stringify(newVisibleChildren) !== JSON.stringify(visibleChildren)
         ? newVisibleChildren
         : visibleChildren;
+    });
+    setChildrenInCenter((childrenInCenter: number | null) => {
+      return newChildrenInCenter !== childrenInCenter ? newChildrenInCenter : childrenInCenter;
     });
   }, [ref]);
 
@@ -76,5 +87,5 @@ export const useVisibleElements = <T>(
     };
   }, [onChangeWithDebounce, ref]);
 
-  return selector(visibleChildren);
+  return selector(visibleChildren, childrenInCenter);
 };

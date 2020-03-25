@@ -244,7 +244,7 @@ Arguments
 
 - `ref`: { React.RefObject\<HTMLDivElement\> } \*
 - `debounce`: { number }. Optional (default 10). The time that the scroll is stopped before firing the visible elements check.
-- `selectorFunction`: { (element:number[]) => any }. This selector gets an array of the visible elements as an argument and the return value will be returned by the useVisibleElements. Use this function to add some logic like select only the first one, calculate if there hidden elements before or later, etc... \*
+- `selectorFunction`: { (element:number[], elementInCenter: number | null) => any }. This selector gets an array of the visible elements as an argument and the return value will be returned by the useVisibleElements. Use this function to add some logic like select only the first one, calculate if there hidden elements before or later, etc... \*
 
 \* _Required fields_
 
