@@ -28,7 +28,7 @@ export const NavBar = ({ show, onSelect, selected }) => (
       <Item onClick={() => onSelect(Math.max(0, selected - 1))}>
         <BackwardArrow className={styles.arrowIcon} />
       </Item>
-      <Item onClick={() => onSelect(maxItems, Math.min(selected + 1))} disabled={selected >= maxItems}>
+      <Item onClick={() => onSelect(Math.min(maxItems, selected + 1))} disabled={selected >= maxItems}>
         <ForwardArrow className={styles.arrowIcon} />
       </Item>
     </div>
