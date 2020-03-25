@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d90079a51d7ed6eb395de29a6335abfb",
+    "revision": "da7dd919f88c8842cd82bf498264f1a0",
     "url": "/react-snaplist-carousel/index.html"
   },
   {
-    "revision": "699edad7e0ba11e3521b",
+    "revision": "66814f6baba031eaa16a",
     "url": "/react-snaplist-carousel/static/css/main.02be0610.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-snaplist-carousel/static/js/2.411b3193.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "699edad7e0ba11e3521b",
-    "url": "/react-snaplist-carousel/static/js/main.83a13f40.chunk.js"
+    "revision": "66814f6baba031eaa16a",
+    "url": "/react-snaplist-carousel/static/js/main.5c2f0b47.chunk.js"
   },
   {
     "revision": "2a7c83a58b5a126f147e",
@@ -40,8 +40,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-snaplist-carousel/static/media/horizontal.4f8678f0.gif"
   },
   {
-    "revision": "ff56ccd5d2ecf3c4806cb64eb4260aa6",
-    "url": "/react-snaplist-carousel/static/media/list.ff56ccd5.gif"
+    "revision": "a1287db86a9603a22e9704f3cd2145c1",
+    "url": "/react-snaplist-carousel/static/media/list.a1287db8.gif"
   },
   {
     "revision": "ffb9006c02da6b52c448eba613adef23",
