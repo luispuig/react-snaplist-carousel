@@ -23,10 +23,10 @@ export const mapItem = ({
 }) => {
   const { paddingLeft, paddingRight, paddingTop, paddingBottom, snapAlign } = mapStyles($item);
   const left = $item.offsetLeft - viewport.offsetLeft + paddingLeft;
-  const width = $item.offsetWidth - paddingRight;
+  const width = $item.offsetWidth - paddingLeft - paddingRight;
   const right = left + width;
   const top = $item.offsetTop - viewport.offsetTop + paddingTop;
-  const height = $item.offsetHeight - paddingBottom;
+  const height = $item.offsetHeight - paddingBottom - paddingTop;
   const bottom = top + height;
 
   return { left, width, right, top, height, bottom, paddingLeft, paddingRight, paddingTop, paddingBottom, snapAlign };
