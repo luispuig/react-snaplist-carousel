@@ -31,3 +31,10 @@ export const mapItem = ({
 
   return { left, width, right, top, height, bottom, paddingLeft, paddingRight, paddingTop, paddingBottom, snapAlign };
 };
+
+export const isTouchDevice = () =>
+  !!(
+    typeof window !== 'undefined' &&
+    ('ontouchstart' in window ||
+      (window.DocumentTouch && typeof document !== 'undefined' && document instanceof window.DocumentTouch))
+  ) || !!(typeof navigator !== 'undefined' && (navigator.maxTouchPoints || navigator.msMaxTouchPoints));

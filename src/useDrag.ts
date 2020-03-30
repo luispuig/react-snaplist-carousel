@@ -3,9 +3,11 @@ import { useEffect } from 'react';
 
 import styles from './stylesdrag.css';
 import { useScroll } from './useScroll';
+import { isTouchDevice } from './utils';
 
 // as found on stackoverflow: https://stackoverflow.com/a/19277804
 const getClosest = (l: number[], t: number): number => l.reduce((p, c) => (Math.abs(c - t) < Math.abs(p - t) ? c : p));
+
 const getElementPosition = (parent: HTMLElement, element: HTMLElement): number =>
   element.offsetLeft - (parent.offsetWidth / 2 - element.offsetWidth / 2) - parent.offsetLeft;
 
@@ -99,7 +101,8 @@ export const useDrag = (ref: RefObject<any>) => {
   }, [ref, handleClick, handleMouseDown, handleMouseMove, handleMouseUp]);
 
   useEffect(() => {
-    if (!ref.current) return;
+    // skip on touch devices
+    if (!ref.current || isTouchDevice()) return;
 
     const target = ref.current;
     const children = target.children;
