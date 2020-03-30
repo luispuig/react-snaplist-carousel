@@ -1,0 +1,105 @@
+import { useCallback, useRef, RefObject } from 'react';
+import { useEffect } from 'react';
+
+import styles from './stylesdrag.css';
+
+// as found on stackoverflow: https://stackoverflow.com/a/19277804
+const getClosest = (l: number[], t: number): number => l.reduce((p, c) => (Math.abs(c - t) < Math.abs(p - t) ? c : p));
+const getElementPosition = (parent: HTMLElement, element: HTMLElement): number =>
+  element.offsetLeft - (parent.offsetWidth / 2 - element.offsetWidth / 2) - parent.offsetLeft;
+
+export const useDrag = (ref: RefObject<any>) => {
+  const elementPositions = useRef<number[]>([]);
+  const timeout = useRef<number | null>(null);
+
+  const dragThreshold = 2; // distance moved before isDragged is set to true and click on children is disabled
+  const isDragged = useRef(false);
+  const isDown = useRef(false);
+  const startX = useRef(0);
+  const slideX = useRef(0);
+
+  // used to determine whether slider is scrolling. After scrolling ends, reset css classes
+  const handleScrolling = useCallback(() => {
+    if (timeout.current) clearTimeout(timeout.current);
+    timeout.current = setTimeout(() => {
+      ref.current.removeEventListener('scroll', handleScrolling);
+      ref.current.classList.remove(styles.snaplist_drag);
+    }, 100) as any;
+  }, [ref, timeout]);
+
+  const handleMouseDown = useCallback(
+    event => {
+      event.preventDefault();
+      isDown.current = true;
+      startX.current = event.pageX - ref.current.offsetLeft;
+      slideX.current = ref.current.scrollLeft;
+    },
+    [ref],
+  );
+
+  const handleMouseMove = useCallback(
+    event => {
+      if (!isDown.current) return;
+
+      const distanceMoved = Math.abs(startX.current - (event.pageX - ref.current.offsetLeft));
+      if (distanceMoved < dragThreshold) return; // skip further action, when not mouse movement is below threshold, thus no drag detected
+      if (timeout.current) clearTimeout(timeout.current);
+      isDragged.current = true;
+      ref.current.classList.add(styles.snaplist_drag, styles.snaplist_nosmoothscroll);
+
+      const x = event.pageX - ref.current.offsetLeft;
+      const displace = x - startX.current;
+      ref.current.scrollLeft = slideX.current - displace;
+    },
+    [ref],
+  );
+
+  const handleMouseUp = useCallback(() => {
+    if (!isDown.current) return;
+    isDown.current = false;
+    isDragged.current = false;
+
+    const dragEndPosition = ref.current.scrollLeft;
+    const scrollTarget = getClosest(elementPositions.current, dragEndPosition);
+    ref.current.classList.remove(styles.snaplist_nosmoothscroll);
+
+    ref.current.addEventListener('scroll', handleScrolling);
+    ref.current.scrollLeft = scrollTarget;
+  }, [ref, handleScrolling]);
+
+  const handleClick = useCallback(
+    event => {
+      // we need this to prevent click events being fired on children
+      if (!isDragged.current) return;
+
+      event.stopPropagation();
+      isDragged.current = false;
+    },
+    [isDragged],
+  );
+
+  const registerHandlers = useCallback(() => {
+    ref.current.addEventListener('mousedown', handleMouseDown);
+    ref.current.addEventListener('click', handleClick);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+  }, [ref, handleClick, handleMouseDown, handleMouseMove, handleMouseUp]);
+  const deregisterHandlers = useCallback(() => {
+    ref.current.removeEventListener('mousedown', handleMouseDown);
+    ref.current.removeEventListener('click', handleClick);
+    window.removeEventListener('mousemove', handleMouseMove);
+    window.removeEventListener('mouseup', handleMouseUp);
+  }, [ref, handleClick, handleMouseDown, handleMouseMove, handleMouseUp]);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const target = ref.current;
+    const children = target.children;
+    elementPositions.current = Array.from(children).map((element: HTMLElement) => getElementPosition(target, element));
+
+    target.classList.add(styles.snaplist_smoothscroll);
+    registerHandlers();
+    return deregisterHandlers;
+  }, [ref, registerHandlers, deregisterHandlers]);
+};
