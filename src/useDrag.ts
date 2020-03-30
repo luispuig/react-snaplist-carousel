@@ -2,6 +2,7 @@ import { useCallback, useRef, RefObject } from 'react';
 import { useEffect } from 'react';
 
 import styles from './stylesdrag.css';
+import { useScroll } from './useScroll';
 
 // as found on stackoverflow: https://stackoverflow.com/a/19277804
 const getClosest = (l: number[], t: number): number => l.reduce((p, c) => (Math.abs(c - t) < Math.abs(p - t) ? c : p));
@@ -9,6 +10,7 @@ const getElementPosition = (parent: HTMLElement, element: HTMLElement): number =
   element.offsetLeft - (parent.offsetWidth / 2 - element.offsetWidth / 2) - parent.offsetLeft;
 
 export const useDrag = (ref: RefObject<any>) => {
+  const goTo = useScroll({ ref });
   const elementPositions = useRef<number[]>([]);
   const timeout = useRef<number | null>(null);
 
@@ -23,7 +25,13 @@ export const useDrag = (ref: RefObject<any>) => {
     if (timeout.current) clearTimeout(timeout.current);
     timeout.current = setTimeout(() => {
       ref.current.removeEventListener('scroll', handleScrolling);
+      isDragged.current = false;
+      // Safari resets scroll position when removing the css class, manually
+      // setting the scroll property afterwards seems to fix the problem
+      // without flashing
+      const currentX = ref.current.scrollLeft;
       ref.current.classList.remove(styles.snaplist_drag);
+      ref.current.scrollLeft = currentX;
     }, 100) as any;
   }, [ref, timeout]);
 
@@ -45,7 +53,7 @@ export const useDrag = (ref: RefObject<any>) => {
       if (distanceMoved < dragThreshold) return; // skip further action, when not mouse movement is below threshold, thus no drag detected
       if (timeout.current) clearTimeout(timeout.current);
       isDragged.current = true;
-      ref.current.classList.add(styles.snaplist_drag, styles.snaplist_nosmoothscroll);
+      ref.current.classList.add(styles.snaplist_drag);
 
       const x = event.pageX - ref.current.offsetLeft;
       const displace = x - startX.current;
@@ -55,17 +63,16 @@ export const useDrag = (ref: RefObject<any>) => {
   );
 
   const handleMouseUp = useCallback(() => {
-    if (!isDown.current) return;
     isDown.current = false;
-    isDragged.current = false;
+    if (!isDragged.current) return;
 
     const dragEndPosition = ref.current.scrollLeft;
     const scrollTarget = getClosest(elementPositions.current, dragEndPosition);
-    ref.current.classList.remove(styles.snaplist_nosmoothscroll);
 
     ref.current.addEventListener('scroll', handleScrolling);
-    ref.current.scrollLeft = scrollTarget;
-  }, [ref, handleScrolling]);
+    const target = elementPositions.current.indexOf(scrollTarget);
+    goTo(target);
+  }, [ref, handleScrolling, goTo]);
 
   const handleClick = useCallback(
     event => {
@@ -98,7 +105,6 @@ export const useDrag = (ref: RefObject<any>) => {
     const children = target.children;
     elementPositions.current = Array.from(children).map((element: HTMLElement) => getElementPosition(target, element));
 
-    target.classList.add(styles.snaplist_smoothscroll);
     registerHandlers();
     return deregisterHandlers;
   }, [ref, registerHandlers, deregisterHandlers]);

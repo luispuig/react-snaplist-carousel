@@ -1,11 +1,3 @@
-.snaplist_smoothscroll {
-  scroll-behavior: smooth;
-}
-
-.snaplist_nosmoothscroll {
-  scroll-behavior: auto;
-}
-
 .snaplist_drag {
   scroll-snap-type: none;
 }
