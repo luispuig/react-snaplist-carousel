@@ -84,6 +84,8 @@ import {
   SnapItem,
   useVisibleElements,
   useScroll,
+  useDragToScroll,
+  isTouchDevice,
 } from 'react-snaplist-carousel';
 
 const MyItem = ({ onClick, children, visible }) => (
@@ -108,6 +110,7 @@ export const App = () => {
     ([element]) => element,
   );
   const goToSnapItem = useScroll({ ref: snapList });
+  const isDragging = useDragToScroll(goToSnapItem);
 
   return (
     <SnapList ref={snapList}>
@@ -252,14 +255,67 @@ Tip
 
 Use many times `useVisibleElements` hook with different `debounce` values for different purposes. For instance with a SnapList to select one option, one with debounce 10 for the slider dots animation or the selected option background and another one with debounce 100 to fire a select sideEffect.
 
+### useDragToScroll
+
+```jsx
+const snapList = useRef(null);
+const selected = useVisibleElements(
+  { ref: snapList, debounce: 10 },
+  elements => elements[0],
+);
+
+const isDragging = useDragToScroll(snapList, {disable: false});
+
+return (
+  <>
+  <p>{isDragging ? 'Dragging': 'No dragging}</p>
+  <SnapList ref={snapList}>
+    <SnapItem snapAlign="left">
+      <div
+        onClick={() => goToElement(0)}
+        style={{
+          backgroundColor: selected === 0 ? 'papayawhip' : null,
+        }}
+      >
+        Item 0
+      </div>
+    </SnapItem>
+    <SnapItem snapAlign="left">
+      <div
+        onClick={() => goToElement(1)}
+        style={{
+          backgroundColor: selected === 1 ? 'papayawhip' : null,
+        }}
+      >
+        Item 1
+      </div>
+    </SnapItem>
+  </SnapList>
+  </p>
+);
+```
+
+Arguments
+
+- `ref`: { React.RefObject\<HTMLDivElement\> } \*
+- `disable`: { booleal }. Optional (default false). The hook will be auto-disabled on touch devices but you can force it using this option.
+
+
+\* _Required fields_
+
+### isTouchDevice
+
+This an internal util function used by `useDragToScroll` that can be useful for you. You can use it to modify your UI depending on the device. For example, you can show next/previous arrows only on no touch devices.
 
 ## Do you want to contribute?
+
 - You can give a star to the project to help with the reputation
 - You can share it with your colleagues.
 - You can fork the repository and make your PR contribution.
 - You can explore using IntersectionObserver for the useVisible hook.
-- You can explore with better scrollTo polyfills. 
+- You can explore with better scrollTo polyfills.
 - You can create usefull extra elements like Dots, Thumbnails, Progress or Arrows.
+- You can create a new demo example, sky is the limit!
 - Yes, you can.
 
 ## License
