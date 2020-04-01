@@ -11,15 +11,14 @@ const getClosest = (l: number[], t: number): number => l.reduce((p, c) => (Math.
 const getElementPosition = (parent: HTMLElement, element: HTMLElement): number =>
   element.offsetLeft - (parent.offsetWidth / 2 - element.offsetWidth / 2) - parent.offsetLeft;
 
+const dragThreshold = 2; // distance moved before isDragged is set to true and click on children is disabled
+
 export const useDragToScroll = (ref: RefObject<any>, { disabled = false }: { disabled?: boolean } = {}) => {
   const goTo = useScroll({ ref });
   const elementPositions = useRef<number[]>([]);
   const timeout = useRef<number | null>(null);
 
-  const dragThreshold = 2; // distance moved before isDragged is set to true and click on children is disabled
   const [isDragging, setIsDragging] = useState(false);
-  console.log(isDragging, setIsDragging);
-  const isDragged = useRef(false);
   const isDown = useRef(false);
   const startX = useRef(0);
   const slideX = useRef(0);
@@ -29,8 +28,7 @@ export const useDragToScroll = (ref: RefObject<any>, { disabled = false }: { dis
     if (timeout.current) clearTimeout(timeout.current);
     timeout.current = setTimeout(() => {
       ref.current.removeEventListener('scroll', handleScrolling);
-      isDragged.current = false;
-
+      setIsDragging(false);
       // Safari resets scroll position when removing the css class, manually
       // setting the scroll property afterwards seems to fix the problem
       // without flashing
@@ -57,7 +55,7 @@ export const useDragToScroll = (ref: RefObject<any>, { disabled = false }: { dis
       const distanceMoved = Math.abs(startX.current - (event.pageX - ref.current.offsetLeft));
       if (distanceMoved < dragThreshold) return; // skip further action, when not mouse movement is below threshold, thus no drag detected
       if (timeout.current) clearTimeout(timeout.current);
-      isDragged.current = true;
+      setIsDragging(true);
       ref.current.classList.add(styles.snaplist_drag);
 
       const x = event.pageX - ref.current.offsetLeft;
@@ -69,7 +67,7 @@ export const useDragToScroll = (ref: RefObject<any>, { disabled = false }: { dis
 
   const handleMouseUp = useCallback(() => {
     isDown.current = false;
-    if (!isDragged.current) return;
+    if (!isDragging) return;
 
     const dragEndPosition = ref.current.scrollLeft;
     const scrollTarget = getClosest(elementPositions.current, dragEndPosition);
@@ -77,17 +75,17 @@ export const useDragToScroll = (ref: RefObject<any>, { disabled = false }: { dis
     ref.current.addEventListener('scroll', handleScrolling);
     const target = elementPositions.current.indexOf(scrollTarget);
     goTo(target);
-  }, [ref, handleScrolling, goTo]);
+  }, [ref, handleScrolling, goTo, isDragging]);
 
   const handleClick = useCallback(
     event => {
       // we need this to prevent click events being fired on children
-      if (!isDragged.current) return;
+      if (!isDragging) return;
 
       event.stopPropagation();
-      isDragged.current = false;
+      setIsDragging(false);
     },
-    [isDragged],
+    [isDragging],
   );
 
   const registerEventListeners = useCallback(() => {
@@ -115,4 +113,6 @@ export const useDragToScroll = (ref: RefObject<any>, { disabled = false }: { dis
     registerEventListeners();
     return removeEventListeners;
   }, [ref, registerEventListeners, removeEventListeners, disabled]);
+
+  return isDragging;
 };
