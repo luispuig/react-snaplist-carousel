@@ -11,7 +11,7 @@ const getClosest = (l: number[], t: number): number => l.reduce((p, c) => (Math.
 const getElementPosition = (parent: HTMLElement, element: HTMLElement): number =>
   element.offsetLeft - (parent.offsetWidth / 2 - element.offsetWidth / 2) - parent.offsetLeft;
 
-export const useDrag = (ref: RefObject<any>) => {
+export const useDrag = (ref: RefObject<any>, { disabled = false }: { disabled?: boolean }) => {
   const goTo = useScroll({ ref });
   const elementPositions = useRef<number[]>([]);
   const timeout = useRef<number | null>(null);
@@ -102,7 +102,7 @@ export const useDrag = (ref: RefObject<any>) => {
 
   useEffect(() => {
     // skip on touch devices
-    if (!ref.current || isTouchDevice()) return;
+    if (!ref.current || isTouchDevice() || disabled) return;
 
     const target = ref.current;
     const children = target.children;
@@ -110,5 +110,5 @@ export const useDrag = (ref: RefObject<any>) => {
 
     registerHandlers();
     return deregisterHandlers;
-  }, [ref, registerHandlers, deregisterHandlers]);
+  }, [ref, registerHandlers, deregisterHandlers, disabled]);
 };
