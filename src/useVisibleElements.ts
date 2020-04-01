@@ -57,20 +57,17 @@ export const useVisibleElements = <T>(
   },
   selector: (elements: number[], childrenInCenter: number | null) => T,
 ): T => {
-  const [visibleChildren, setVisibleChildren] = useState<number[]>([0]);
-  const [childrenInCenter, setChildrenInCenter] = useState<number | null>(null);
+  const [result, setResult] = useState<T>(selector([0], null));
 
   const onChange = useCallback(() => {
     const { children: newVisibleChildren, childrenInCenter: newChildrenInCenter } = getVisibleChildren(ref.current);
-    setVisibleChildren((visibleChildren: number[]) => {
-      return newVisibleChildren.length > 0 && JSON.stringify(newVisibleChildren) !== JSON.stringify(visibleChildren)
-        ? newVisibleChildren
-        : visibleChildren;
+    if (newVisibleChildren.length === 0) return;
+    const newResult = selector(newVisibleChildren, newChildrenInCenter);
+
+    setResult((result: T) => {
+      return JSON.stringify(newResult) !== JSON.stringify(result) ? newResult : result;
     });
-    setChildrenInCenter((childrenInCenter: number | null) => {
-      return newChildrenInCenter !== childrenInCenter ? newChildrenInCenter : childrenInCenter;
-    });
-  }, [ref]);
+  }, [ref, selector]);
 
   const onChangeWithDebounce = useCallback(debounceHOF(onChange, debounce), [onChange]);
 
@@ -87,5 +84,5 @@ export const useVisibleElements = <T>(
     };
   }, [onChangeWithDebounce, ref]);
 
-  return selector(visibleChildren, childrenInCenter);
+  return result;
 };

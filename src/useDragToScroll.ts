@@ -1,4 +1,4 @@
-import { useCallback, useRef, RefObject } from 'react';
+import { useCallback, useRef, RefObject, useState } from 'react';
 import { useEffect } from 'react';
 
 import styles from './stylesdrag.css';
@@ -11,13 +11,14 @@ const getClosest = (l: number[], t: number): number => l.reduce((p, c) => (Math.
 const getElementPosition = (parent: HTMLElement, element: HTMLElement): number =>
   element.offsetLeft - (parent.offsetWidth / 2 - element.offsetWidth / 2) - parent.offsetLeft;
 
-export const useDrag = (ref: RefObject<any>) => {
+const dragThreshold = 2; // distance moved before isDragged is set to true and click on children is disabled
+
+export const useDragToScroll = (ref: RefObject<any>, { disabled = false }: { disabled?: boolean } = {}) => {
   const goTo = useScroll({ ref });
   const elementPositions = useRef<number[]>([]);
   const timeout = useRef<number | null>(null);
 
-  const dragThreshold = 2; // distance moved before isDragged is set to true and click on children is disabled
-  const isDragged = useRef(false);
+  const [isDragging, setIsDragging] = useState(false);
   const isDown = useRef(false);
   const startX = useRef(0);
   const slideX = useRef(0);
@@ -27,7 +28,7 @@ export const useDrag = (ref: RefObject<any>) => {
     if (timeout.current) clearTimeout(timeout.current);
     timeout.current = setTimeout(() => {
       ref.current.removeEventListener('scroll', handleScrolling);
-      isDragged.current = false;
+      setIsDragging(false);
       // Safari resets scroll position when removing the css class, manually
       // setting the scroll property afterwards seems to fix the problem
       // without flashing
@@ -54,7 +55,7 @@ export const useDrag = (ref: RefObject<any>) => {
       const distanceMoved = Math.abs(startX.current - (event.pageX - ref.current.offsetLeft));
       if (distanceMoved < dragThreshold) return; // skip further action, when not mouse movement is below threshold, thus no drag detected
       if (timeout.current) clearTimeout(timeout.current);
-      isDragged.current = true;
+      setIsDragging(true);
       ref.current.classList.add(styles.snaplist_drag);
 
       const x = event.pageX - ref.current.offsetLeft;
@@ -66,7 +67,7 @@ export const useDrag = (ref: RefObject<any>) => {
 
   const handleMouseUp = useCallback(() => {
     isDown.current = false;
-    if (!isDragged.current) return;
+    if (!isDragging) return;
 
     const dragEndPosition = ref.current.scrollLeft;
     const scrollTarget = getClosest(elementPositions.current, dragEndPosition);
@@ -74,26 +75,27 @@ export const useDrag = (ref: RefObject<any>) => {
     ref.current.addEventListener('scroll', handleScrolling);
     const target = elementPositions.current.indexOf(scrollTarget);
     goTo(target);
-  }, [ref, handleScrolling, goTo]);
+  }, [ref, handleScrolling, goTo, isDragging]);
 
   const handleClick = useCallback(
     event => {
       // we need this to prevent click events being fired on children
-      if (!isDragged.current) return;
+      if (!isDragging) return;
 
       event.stopPropagation();
-      isDragged.current = false;
+      setIsDragging(false);
     },
-    [isDragged],
+    [isDragging],
   );
 
-  const registerHandlers = useCallback(() => {
+  const registerEventListeners = useCallback(() => {
     ref.current.addEventListener('mousedown', handleMouseDown);
     ref.current.addEventListener('click', handleClick);
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
   }, [ref, handleClick, handleMouseDown, handleMouseMove, handleMouseUp]);
-  const deregisterHandlers = useCallback(() => {
+
+  const removeEventListeners = useCallback(() => {
     ref.current.removeEventListener('mousedown', handleMouseDown);
     ref.current.removeEventListener('click', handleClick);
     window.removeEventListener('mousemove', handleMouseMove);
@@ -102,13 +104,15 @@ export const useDrag = (ref: RefObject<any>) => {
 
   useEffect(() => {
     // skip on touch devices
-    if (!ref.current || isTouchDevice()) return;
+    if (!ref.current || isTouchDevice() || disabled) return;
 
     const target = ref.current;
     const children = target.children;
     elementPositions.current = Array.from(children).map((element: HTMLElement) => getElementPosition(target, element));
 
-    registerHandlers();
-    return deregisterHandlers;
-  }, [ref, registerHandlers, deregisterHandlers]);
+    registerEventListeners();
+    return removeEventListeners;
+  }, [ref, registerEventListeners, removeEventListeners, disabled]);
+
+  return isDragging;
 };

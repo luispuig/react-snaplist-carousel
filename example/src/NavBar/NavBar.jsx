@@ -15,7 +15,7 @@ const Item = ({ children, onClick, disabled }) => (
   </div>
 );
 
-const maxItems = 3;
+const maxItems = 4;
 
 export const NavBar = ({ show, onSelect, selected }) => (
   <div className={mergeStyles(styles.topBar, !show ? styles.topBar_hidden : null)}>
