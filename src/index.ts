@@ -1,4 +1,4 @@
 export { SnapItem, SnapList } from './SnapList';
-export { useDrag } from './useDrag';
+export { useDragToScroll } from './useDragToScroll';
 export { useScroll } from './useScroll';
 export { useVisibleElements } from './useVisibleElements';

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-import { SnapList, SnapItem, useVisibleElements, useScroll, useDrag } from 'react-snaplist-carousel';
+import { SnapList, SnapItem, useVisibleElements, useScroll, useDragToScroll } from 'react-snaplist-carousel';
 
 import styles from './styles.module.css';
 
@@ -23,7 +23,7 @@ export const HorizontalDraggable = () => {
   const visible = useVisibleElements({ debounce: 10, ref: snapList }, ([element]) => element);
   const goTo = useScroll({ ref: snapList });
 
-  useDrag(snapList);
+  useDragToScroll(snapList);
 
   return (
     <SnapList ref={snapList} direction="horizontal">

@@ -1,4 +1,4 @@
-import { useCallback, useRef, RefObject } from 'react';
+import { useCallback, useRef, RefObject, useState } from 'react';
 import { useEffect } from 'react';
 
 import styles from './stylesdrag.css';
@@ -11,12 +11,14 @@ const getClosest = (l: number[], t: number): number => l.reduce((p, c) => (Math.
 const getElementPosition = (parent: HTMLElement, element: HTMLElement): number =>
   element.offsetLeft - (parent.offsetWidth / 2 - element.offsetWidth / 2) - parent.offsetLeft;
 
-export const useDrag = (ref: RefObject<any>, { disabled = false }: { disabled?: boolean }) => {
+export const useDragToScroll = (ref: RefObject<any>, { disabled = false }: { disabled?: boolean } = {}) => {
   const goTo = useScroll({ ref });
   const elementPositions = useRef<number[]>([]);
   const timeout = useRef<number | null>(null);
 
   const dragThreshold = 2; // distance moved before isDragged is set to true and click on children is disabled
+  const [isDragging, setIsDragging] = useState(false);
+  console.log(isDragging, setIsDragging);
   const isDragged = useRef(false);
   const isDown = useRef(false);
   const startX = useRef(0);
@@ -28,6 +30,7 @@ export const useDrag = (ref: RefObject<any>, { disabled = false }: { disabled?: 
     timeout.current = setTimeout(() => {
       ref.current.removeEventListener('scroll', handleScrolling);
       isDragged.current = false;
+
       // Safari resets scroll position when removing the css class, manually
       // setting the scroll property afterwards seems to fix the problem
       // without flashing
@@ -87,13 +90,14 @@ export const useDrag = (ref: RefObject<any>, { disabled = false }: { disabled?: 
     [isDragged],
   );
 
-  const registerHandlers = useCallback(() => {
+  const registerEventListeners = useCallback(() => {
     ref.current.addEventListener('mousedown', handleMouseDown);
     ref.current.addEventListener('click', handleClick);
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
   }, [ref, handleClick, handleMouseDown, handleMouseMove, handleMouseUp]);
-  const deregisterHandlers = useCallback(() => {
+
+  const removeEventListeners = useCallback(() => {
     ref.current.removeEventListener('mousedown', handleMouseDown);
     ref.current.removeEventListener('click', handleClick);
     window.removeEventListener('mousemove', handleMouseMove);
@@ -108,7 +112,7 @@ export const useDrag = (ref: RefObject<any>, { disabled = false }: { disabled?: 
     const children = target.children;
     elementPositions.current = Array.from(children).map((element: HTMLElement) => getElementPosition(target, element));
 
-    registerHandlers();
-    return deregisterHandlers;
-  }, [ref, registerHandlers, deregisterHandlers, disabled]);
+    registerEventListeners();
+    return removeEventListeners;
+  }, [ref, registerEventListeners, removeEventListeners, disabled]);
 };
