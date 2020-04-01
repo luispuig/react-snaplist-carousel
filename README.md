@@ -257,6 +257,8 @@ Use many times `useVisibleElements` hook with different `debounce` values for di
 
 ### useDragToScroll
 
+> Thanks <a href="https://github.com/danieljb" target="_blank">@danieljb</a> for the contribution
+
 ```jsx
 const snapList = useRef(null);
 const selected = useVisibleElements(
@@ -299,7 +301,6 @@ Arguments
 
 - `ref`: { React.RefObject\<HTMLDivElement\> } \*
 - `disable`: { booleal }. Optional (default false). The hook will be auto-disabled on touch devices but you can force it using this option.
-
 
 \* _Required fields_
 
