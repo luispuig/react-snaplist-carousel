@@ -1,0 +1,7 @@
+.snaplist_drag {
+  scroll-snap-type: none;
+}
+
+.snaplist_drag * {
+  user-select: none;
+}

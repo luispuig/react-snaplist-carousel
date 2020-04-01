@@ -3,6 +3,7 @@ import { SnapList, SnapItem, useScroll } from 'react-snaplist-carousel';
 import { Frame } from './Frame';
 import { NavBar } from './NavBar';
 import { Menu } from './Menu';
+import { HorizontalDraggable } from './HorizontalDraggable';
 import { Horizontal } from './Horizontal';
 import { Vertical } from './Vertical';
 import { List } from './List';
@@ -45,6 +46,9 @@ export const App = () => {
         </SnapItem>
         <SnapItem snapAlign="start" width="100%">
           <List />
+        </SnapItem>
+        <SnapItem snapAlign="start" width="100%">
+          <HorizontalDraggable />
         </SnapItem>
       </SnapList>
     </Frame>

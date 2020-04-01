@@ -47,6 +47,10 @@ export const Menu = ({ onSelect }) => {
           <img src={list} alt="list-example" width="100%" onClick={() => onSelect(3)}/>
           <div className={styles.exampleTitle}>List</div>
         </div>
+        <div className={styles.example}>
+          <img src={horizontal} alt="horizontal-draggable-example" width="100%" onClick={() => onSelect(4)}/>
+          <div className={styles.exampleTitle}>Horizontal (draggable)</div>
+        </div>
       </div>
     </div>
   );

@@ -44,7 +44,7 @@ margin-bottom: 5px;
 
 .examples {
   display: grid;
-  grid-template-columns: 25% 25% 25%;
+  grid-template-columns: 20% 20% 20% 20%;
   grid-column-gap: 30px;
   padding: 15px 20px 0;
 }
