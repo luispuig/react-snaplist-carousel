@@ -15,9 +15,7 @@ const Item = ({ children, onClick, disabled }) => (
   </div>
 );
 
-const maxItems = 4;
-
-export const NavBar = ({ show, onSelect, selected }) => (
+export const NavBar = ({ show, onSelect, selected, screens }) => (
   <div className={mergeStyles(styles.topBar, !show ? styles.topBar_hidden : null)}>
     <div className={styles.left}>
       <Item onClick={() => onSelect(0)}>
@@ -28,7 +26,7 @@ export const NavBar = ({ show, onSelect, selected }) => (
       <Item onClick={() => onSelect(Math.max(0, selected - 1))}>
         <BackwardArrow className={styles.arrowIcon} />
       </Item>
-      <Item onClick={() => onSelect(Math.min(maxItems, selected + 1))} disabled={selected >= maxItems}>
+      <Item onClick={() => onSelect(Math.min(screens, selected + 1))} disabled={selected >= screens}>
         <ForwardArrow className={styles.arrowIcon} />
       </Item>
     </div>

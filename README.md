@@ -110,7 +110,7 @@ export const App = () => {
     ([element]) => element,
   );
   const goToSnapItem = useScroll({ ref: snapList });
-  const isDragging = useDragToScroll(goToSnapItem);
+  const isDragging = useDragToScroll({ ref: snapList });
 
   return (
     <SnapList ref={snapList}>
@@ -266,7 +266,7 @@ const selected = useVisibleElements(
   elements => elements[0],
 );
 
-const isDragging = useDragToScroll(snapList, {disable: false});
+const isDragging = useDragToScroll({ref: snapList, disable: false});
 
 return (
   <>
