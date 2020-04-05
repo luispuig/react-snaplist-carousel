@@ -319,6 +319,15 @@ This an internal util function used by `useDragToScroll` that can be useful for 
 - You can create a new demo example, sky is the limit!
 - Yes, you can.
 
+## Changelog
+
+### Version 3
+
+- Added useDragToScroll
+- Added util isTouchDevice
+- Improved useScroll. Now uses the scrollPading to calculate the position of the elements.
+- **Breakchange** the SnapItem elements now uses margin in favor of padding. The browser native behavior works better works better.
+
 ## License
 
 MIT © [luispuig](https://github.com/luispuig)
