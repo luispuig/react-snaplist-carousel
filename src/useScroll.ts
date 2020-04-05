@@ -25,8 +25,9 @@ export const useScroll = ({ ref }: { ref: RefObject<any> }) => {
       if (!$viewport) return;
       const $items = toArray($viewport.children);
       const $item = element >= 0 && $items.length ? $items[element] : null;
-      if (!$item) return;
 
+      if (!$item) return;
+      const viewportStyles = mapStyles($viewport);
       const viewport = {
         left: $viewport.scrollLeft,
         width: $viewport.offsetWidth,
@@ -40,6 +41,10 @@ export const useScroll = ({ ref }: { ref: RefObject<any> }) => {
         paddingRight: mapStyles($items[$items.length - 1]).paddingRight,
         paddingTop: mapStyles($items[0]).paddingTop,
         paddingBottom: mapStyles($items[$items.length - 1]).paddingBottom,
+        scrollPaddingLeft: viewportStyles.scrollPaddingLeft,
+        scrollPaddingRight: viewportStyles.scrollPaddingRight,
+        scrollPaddingTop: viewportStyles.scrollPaddingTop,
+        scrollPaddingBottom: viewportStyles.scrollPaddingBottom,
       };
 
       const item = mapItem({ $item, viewport });
@@ -47,18 +52,18 @@ export const useScroll = ({ ref }: { ref: RefObject<any> }) => {
       switch (item.snapAlign) {
         case 'start':
           return {
-            left: item.left - item.paddingLeft - viewport.paddingLeft,
-            top: item.top - item.paddingTop - viewport.paddingTop,
+            left: item.left - item.paddingLeft - viewport.paddingLeft - viewport.scrollPaddingLeft,
+            top: item.top - item.paddingTop - viewport.paddingTop - viewport.scrollPaddingTop,
           };
         case 'end':
           return {
-            left: item.left - (viewport.width - item.width) + viewport.paddingRight,
-            top: item.top - (viewport.height - item.height) + viewport.paddingBottom,
+            left: item.left - (viewport.width - item.width) + viewport.paddingRight + viewport.scrollPaddingRight,
+            top: item.top - (viewport.height - item.height) + viewport.paddingBottom + viewport.scrollPaddingBottom,
           };
         case 'center':
           return {
-            left: item.left - (viewport.width - item.width) / 2,
-            top: item.top - (viewport.height - item.height) / 2,
+            left: item.left - (viewport.width - item.width) / 2 - viewport.scrollPaddingLeft / 2,
+            top: item.top - (viewport.height - item.height) / 2 - viewport.scrollPaddingTop / 2,
           };
 
         default:

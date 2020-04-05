@@ -31,14 +31,15 @@ const SnapListComponent: React.FC<CarouselProps> = (
     style={{
       width,
       height,
-      scrollPaddingTop: scrollPadding?.top,
-      scrollPaddingRight: scrollPadding?.right,
-      scrollPaddingBottom: scrollPadding?.bottom,
-      scrollPaddingLeft: scrollPadding?.left,
+      scrollPaddingTop: scrollPadding?.top ?? '0px',
+      scrollPaddingRight: scrollPadding?.right ?? '0px',
+      scrollPaddingBottom: scrollPadding?.bottom ?? '0px',
+      scrollPaddingLeft: scrollPadding?.left ?? '0px',
     }}
     ref={ref}
   >
     {children}
+    <div className={styles.snapItem_marginBreaker}>&nbsp;</div>
   </div>
 );
 
@@ -47,7 +48,7 @@ type WithChildren<T> = T & { children?: React.ReactNode };
 export const SnapList = React.forwardRef<HTMLDivElement, WithChildren<CarouselProps>>(SnapListComponent);
 
 export const SnapItem: React.FC<{
-  padding?: {
+  margin?: {
     top?: string;
     right?: string;
     bottom?: string;
@@ -58,7 +59,7 @@ export const SnapItem: React.FC<{
   snapAlign: 'start' | 'center' | 'end' | 'none';
   forceStop?: boolean;
   className?: string;
-}> = ({ children, padding, snapAlign = 'center', forceStop = false, width, height, className }) => (
+}> = ({ children, margin, snapAlign = 'center', forceStop = false, width, height, className }) => (
   <div
     className={mergeStyles(
       styles.snapitem,
@@ -67,10 +68,10 @@ export const SnapItem: React.FC<{
       className,
     )}
     style={{
-      paddingTop: padding?.top,
-      paddingRight: padding?.right,
-      paddingBottom: padding?.bottom,
-      paddingLeft: padding?.left,
+      marginTop: margin?.top,
+      marginRight: margin?.right,
+      marginBottom: margin?.bottom,
+      marginLeft: margin?.left,
       width,
       height,
     }}

@@ -32,27 +32,27 @@ export const Horizontal = () => {
       }}
     >
       <SnapList ref={snapList} direction="horizontal">
-        <SnapItem padding={{ left: '15px', right: '15px' }} width="60%" snapAlign="center">
+        <SnapItem margin={{ left: '15px', right: '15px' }} width="60%" snapAlign="center">
           <Item onClick={() => goToChildren(0)} visible={visible === 0} isDragging={isDragging}>
             Item 0
           </Item>
         </SnapItem>
-        <SnapItem padding={{ left: '15px', right: '15px' }} width="60%" snapAlign="center">
+        <SnapItem margin={{ left: '15px', right: '15px' }} width="60%" snapAlign="center">
           <Item onClick={() => goToChildren(1)} visible={visible === 1} isDragging={isDragging}>
             Item 1
           </Item>
         </SnapItem>
-        <SnapItem padding={{ left: '15px', right: '15px' }} width="60%" snapAlign="center">
+        <SnapItem margin={{ left: '15px', right: '15px' }} width="60%" snapAlign="center">
           <Item onClick={() => goToChildren(2)} visible={visible === 2} isDragging={isDragging}>
             Item 2
           </Item>
         </SnapItem>
-        <SnapItem padding={{ left: '15px', right: '15px' }} width="60%" snapAlign="center">
+        <SnapItem margin={{ left: '15px', right: '15px' }} width="60%" snapAlign="center">
           <Item onClick={() => goToChildren(3)} visible={visible === 3} isDragging={isDragging}>
             Item 3
           </Item>
         </SnapItem>
-        <SnapItem padding={{ left: '15px', right: '15px' }} width="60%" snapAlign="center">
+        <SnapItem margin={{ left: '15px', right: '15px' }} width="60%" snapAlign="center">
           <Item onClick={() => goToChildren(4)} visible={visible === 4} isDragging={isDragging}>
             Item 4
           </Item>

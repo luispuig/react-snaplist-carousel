@@ -55,19 +55,19 @@ const MyItem = ({ children }) => (
 
 export const App = () => (
   <SnapList>
-    <SnapItem padding={{ left: '15px', right: '15px' }} snapAlign="center">
+    <SnapItem margin={{ left: '15px', right: '15px' }} snapAlign="center">
       <MyItem>Item 0</MyItem>
     </SnapItem>
-    <SnapItem padding={{ left: '15px', right: '15px' }} snapAlign="center">
+    <SnapItem margin={{ left: '15px', right: '15px' }} snapAlign="center">
       <MyItem>Item 1</MyItem>
     </SnapItem>
-    <SnapItem padding={{ left: '15px', right: '15px' }} snapAlign="center">
+    <SnapItem margin={{ left: '15px', right: '15px' }} snapAlign="center">
       <MyItem>Item 2</MyItem>
     </SnapItem>
-    <SnapItem padding={{ left: '15px', right: '15px' }} snapAlign="center">
+    <SnapItem margin={{ left: '15px', right: '15px' }} snapAlign="center">
       <MyItem>Item 3</MyItem>
     </SnapItem>
-    <SnapItem padding={{ left: '15px', right: '15px' }} snapAlign="center">
+    <SnapItem margin={{ left: '15px', right: '15px' }} snapAlign="center">
       <MyItem>Item 4</MyItem>
     </SnapItem>
   </SnapList>
@@ -114,27 +114,27 @@ export const App = () => {
 
   return (
     <SnapList ref={snapList}>
-      <SnapItem padding={{ left: '20vw', right: '15px' }} snapAlign="center">
+      <SnapItem margin={{ left: '20vw', right: '15px' }} snapAlign="center">
         <MyItem onClick={() => goToSnapItem(0)} visible={visible === 0}>
           Item 0
         </MyItem>
       </SnapItem>
-      <SnapItem padding={{ left: '15px', right: '15px' }} snapAlign="center">
+      <SnapItem margin={{ left: '15px', right: '15px' }} snapAlign="center">
         <MyItem onClick={() => goToSnapItem(1)} visible={visible === 1}>
           Item 1
         </MyItem>
       </SnapItem>
-      <SnapItem padding={{ left: '15px', right: '15px' }} snapAlign="center">
+      <SnapItem margin={{ left: '15px', right: '15px' }} snapAlign="center">
         <MyItem onClick={() => goToSnapItem(2)} visible={visible === 2}>
           Item 2
         </MyItem>
       </SnapItem>
-      <SnapItem padding={{ left: '15px', right: '15px' }} snapAlign="center">
+      <SnapItem margin={{ left: '15px', right: '15px' }} snapAlign="center">
         <MyItem onClick={() => goToSnapItem(3)} visible={visible === 3}>
           Item 3
         </MyItem>
       </SnapItem>
-      <SnapItem padding={{ left: '15px', right: '20vw' }} snapAlign="center">
+      <SnapItem margin={{ left: '15px', right: '20vw' }} snapAlign="center">
         <MyItem onClick={() => goToSnapItem(4)} visible={visible === 4}>
           Item 4
         </MyItem>
@@ -169,12 +169,12 @@ export const App = () => {
 - `disableScroll` { boolean | undefined }: Avoid the scroll to "pass over" possible snap positions. See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-stop" target="_blank">scroll-snap-stop</a> for more information
 - `width` { string | undefined }: Width CSS property
 - `height` { string | undefined }: Height CSS property
-- `padding` { {
+- `margin` { {
   top?: string;
   right?: string;
   bottom?: string;
   left?: string;
-  } | undefined }: The padding use to set the separation between the items. You can use different padding for the first and last item to get better results.
+  } | undefined }: The margin is used to set the separation between the items. You can use different margin for the first and last item to get better results.
 - `className` { string | undefined }: 🚑Please, use this only in case of emergency. It allows you to add/overwrite/extend all the CSS properties. If you need this, please consider opening an issue or contribute with a PR to cover your use case.
 
 \* _Required fields_
@@ -318,6 +318,15 @@ This an internal util function used by `useDragToScroll` that can be useful for 
 - You can create usefull extra elements like Dots, Thumbnails, Progress or Arrows.
 - You can create a new demo example, sky is the limit!
 - Yes, you can.
+
+## Changelog
+
+### Version 3
+
+- Added useDragToScroll
+- Added util isTouchDevice
+- Improved useScroll. Now uses the scrollPading to calculate the position of the elements.
+- **Breakchange** the SnapItem elements now uses margin in favor of padding. The browser native behavior works better works better.
 
 ## License
 

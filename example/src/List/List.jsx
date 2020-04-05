@@ -17,6 +17,7 @@ const Item = ({ onClick, children, visible }) => (
   </div>
 );
 
+const itemWidth = 100;
 export const List = () => {
   const snapList = useRef(null);
 
@@ -25,79 +26,79 @@ export const List = () => {
   useDragToScroll({ ref: snapList });
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} id="list">
       <SnapList ref={snapList} direction="horizontal" height="auto">
-        <SnapItem padding={{ left: 'calc(50% - (100px/2)', right: '10px' }} snapAlign="center">
+        <SnapItem margin={{ left: `calc(50% - (${itemWidth}px/2)`, right: '10px' }} snapAlign="center">
           <Item onClick={() => goToChildren(0)} visible={visible === 0}>
             Item 0
           </Item>
         </SnapItem>
-        <SnapItem padding={{ left: '10px', right: '10px' }} snapAlign="center">
+        <SnapItem margin={{ left: '10px', right: '10px' }} snapAlign="center">
           <Item onClick={() => goToChildren(1)} visible={visible === 1}>
             Item 1
           </Item>
         </SnapItem>
-        <SnapItem padding={{ left: '10px', right: '10px' }} snapAlign="center">
+        <SnapItem margin={{ left: '10px', right: '10px' }} snapAlign="center">
           <Item onClick={() => goToChildren(2)} visible={visible === 2}>
             Item 2
           </Item>
         </SnapItem>
-        <SnapItem padding={{ left: '10px', right: '10px' }} snapAlign="center">
+        <SnapItem margin={{ left: '10px', right: '10px' }} snapAlign="center">
           <Item onClick={() => goToChildren(3)} visible={visible === 3}>
             Item 3
           </Item>
         </SnapItem>
-        <SnapItem padding={{ left: '10px', right: '10px' }} snapAlign="center">
+        <SnapItem margin={{ left: '10px', right: '10px' }} snapAlign="center">
           <Item onClick={() => goToChildren(4)} visible={visible === 4}>
             Item 4
           </Item>
         </SnapItem>
-        <SnapItem padding={{ left: '10px', right: '10px' }} snapAlign="center">
+        <SnapItem margin={{ left: '10px', right: '10px' }} snapAlign="center">
           <Item onClick={() => goToChildren(5)} visible={visible === 5}>
             Item 5
           </Item>
         </SnapItem>
-        <SnapItem padding={{ left: '10px', right: '10px' }} snapAlign="center">
+        <SnapItem margin={{ left: '10px', right: '10px' }} snapAlign="center">
           <Item onClick={() => goToChildren(6)} visible={visible === 6}>
             Item 6
           </Item>
         </SnapItem>
-        <SnapItem padding={{ left: '10px', right: '10px' }} snapAlign="center">
+        <SnapItem margin={{ left: '10px', right: '10px' }} snapAlign="center">
           <Item onClick={() => goToChildren(7)} visible={visible === 7}>
             Item 7
           </Item>
         </SnapItem>
-        <SnapItem padding={{ left: '10px', right: '10px' }} snapAlign="end">
+        <SnapItem margin={{ left: '10px', right: '10px' }} snapAlign="center">
           <Item onClick={() => goToChildren(8)} visible={visible === 8}>
             Item 8
           </Item>
         </SnapItem>
-        <SnapItem padding={{ left: '10px', right: '10px' }} snapAlign="center">
+        <SnapItem margin={{ left: '10px', right: '10px' }} snapAlign="center">
           <Item onClick={() => goToChildren(9)} visible={visible === 9}>
             Item 9
           </Item>
         </SnapItem>
-        <SnapItem padding={{ left: '10px', right: '10px' }} snapAlign="center">
+        <SnapItem margin={{ left: '10px', right: '10px' }} snapAlign="center">
           <Item onClick={() => goToChildren(10)} visible={visible === 10}>
             Item 10
           </Item>
         </SnapItem>
-        <SnapItem padding={{ left: '10px', right: '10px' }} snapAlign="center">
+        <SnapItem margin={{ left: '10px', right: '10px' }} snapAlign="center">
           <Item onClick={() => goToChildren(11)} visible={visible === 11}>
             Item 11
           </Item>
         </SnapItem>
-        <SnapItem padding={{ left: '10px', right: '10px' }} snapAlign="center">
+        <SnapItem margin={{ left: '10px', right: '10px' }} snapAlign="center">
           <Item onClick={() => goToChildren(12)} visible={visible === 12}>
             Item 12
           </Item>
         </SnapItem>
-        <SnapItem padding={{ left: '10px', right: '10px' }} snapAlign="center">
+        <SnapItem margin={{ left: '10px', right: '10px' }} snapAlign="center">
           <Item onClick={() => goToChildren(13)} visible={visible === 13}>
             Item 13
           </Item>
         </SnapItem>
-        <SnapItem padding={{ left: '10px', right: 'calc(50% - (100px/2)' }} snapAlign="center">
+        <SnapItem margin={{ left: '10px', right: `calc(50% - (${itemWidth}px/2)` }} snapAlign="center">
           <Item onClick={() => goToChildren(14)} visible={visible === 14}>
             Item 14
           </Item>

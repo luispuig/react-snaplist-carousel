@@ -43,6 +43,13 @@
   flex-basis: auto;
 }
 
+.snapItem_marginBreaker {
+  font-size: 1px;
+  width: 1px;
+  width: 0px;
+  max-width: 0;
+}
+
 .snapitem_align_center {
   scroll-snap-align: center;
 }
