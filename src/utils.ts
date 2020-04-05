@@ -2,6 +2,10 @@ export const mergeStyles = (...classnames: (string | null | undefined)[]) => cla
 
 interface Styles extends CSSStyleDeclaration {
   scrollSnapAlign: string;
+  scrollPaddingLeft: string;
+  scrollPaddingRight: string;
+  scrollPaddingTop: string;
+  scrollPaddingBottom: string;
 }
 
 export const mapStyles = ($item: HTMLElement) => {
@@ -11,7 +15,21 @@ export const mapStyles = ($item: HTMLElement) => {
   const paddingTop = parseInt(styles.paddingTop || '');
   const paddingBottom = parseInt(styles.paddingBottom || '');
   const [snapAlign] = styles.scrollSnapAlign.split(' ');
-  return { paddingLeft, paddingRight, paddingTop, paddingBottom, snapAlign };
+  const scrollPaddingLeft = parseInt(styles.scrollPaddingLeft || '');
+  const scrollPaddingRight = parseInt(styles.scrollPaddingRight || '');
+  const scrollPaddingTop = parseInt(styles.scrollPaddingTop || '');
+  const scrollPaddingBottom = parseInt(styles.scrollPaddingBottom || '');
+  return {
+    paddingLeft,
+    paddingRight,
+    paddingTop,
+    paddingBottom,
+    snapAlign,
+    scrollPaddingLeft,
+    scrollPaddingRight,
+    scrollPaddingTop,
+    scrollPaddingBottom,
+  };
 };
 
 export const mapItem = ({

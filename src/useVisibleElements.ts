@@ -1,6 +1,5 @@
 import { useEffect, useState, useCallback, RefObject } from 'react';
-
-import { mapItem } from './utils';
+import { mapItem, mapStyles } from './utils';
 
 const debounceHOF = (callback: () => void, ms: number) => {
   let timeout: any;
@@ -15,6 +14,7 @@ const debounceHOF = (callback: () => void, ms: number) => {
 
 export const getVisibleChildren = ($viewport?: HTMLDivElement | null) => {
   if (!$viewport) return { children: [], childrenInCenter: null };
+  const viewportStyles = mapStyles($viewport);
   const viewport = {
     left: $viewport.scrollLeft,
     width: $viewport.offsetWidth,
@@ -24,8 +24,8 @@ export const getVisibleChildren = ($viewport?: HTMLDivElement | null) => {
     bottom: $viewport.scrollTop + $viewport.offsetHeight,
     offsetLeft: $viewport.offsetLeft,
     offsetTop: $viewport.offsetTop,
-    centerHorizontal: $viewport.scrollLeft + $viewport.offsetWidth / 2,
-    centerVertical: $viewport.scrollTop + $viewport.offsetHeight / 2,
+    centerHorizontal: viewportStyles.scrollPaddingLeft / 2 + $viewport.scrollLeft + $viewport.offsetWidth / 2,
+    centerVertical: viewportStyles.scrollPaddingTop / 2 + $viewport.scrollTop + $viewport.offsetHeight / 2,
   };
   const children = [];
   const $items = $viewport.children;
