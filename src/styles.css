@@ -43,11 +43,12 @@
   flex-basis: auto;
 }
 
-.snapItem_marginBreaker {
-  font-size: 1px;
-  width: 1px;
+.snaplist:last-child::after {
+  content: '.';
+  font-size: 0px;
   width: 0px;
   max-width: 0;
+  border-left: solid 1px transparent;
 }
 
 .snapitem_align_center {

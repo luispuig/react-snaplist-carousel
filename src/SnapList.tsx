@@ -39,7 +39,6 @@ const SnapListComponent: React.FC<CarouselProps> = (
     ref={ref}
   >
     {children}
-    <div className={styles.snapItem_marginBreaker}>&nbsp;</div>
   </div>
 );
 
