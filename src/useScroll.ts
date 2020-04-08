@@ -11,6 +11,10 @@ const toArray = ($items: HTMLCollection) => {
   }
   return children;
 };
+
+const normalize = (value: number, { min, max }: { min: number; max: number }) => {
+  return Math.min(max, Math.max(min, value));
+};
 export const useScroll = ({ ref }: { ref: RefObject<any> }) => {
   const getScrollFor = useCallback(
     (
@@ -45,30 +49,40 @@ export const useScroll = ({ ref }: { ref: RefObject<any> }) => {
         scrollPaddingRight: viewportStyles.scrollPaddingRight,
         scrollPaddingTop: viewportStyles.scrollPaddingTop,
         scrollPaddingBottom: viewportStyles.scrollPaddingBottom,
+        scrollWidth: $viewport.scrollWidth,
+        scrollHeight: $viewport.scrollHeight,
       };
 
       const item = mapItem({ $item, viewport });
 
+      let target = { left: 0, top: 0 };
       switch (item.snapAlign) {
         case 'start':
-          return {
+          target = {
             left: item.left - item.paddingLeft - viewport.paddingLeft - viewport.scrollPaddingLeft,
             top: item.top - item.paddingTop - viewport.paddingTop - viewport.scrollPaddingTop,
           };
+          break;
         case 'end':
-          return {
+          target = {
             left: item.left - (viewport.width - item.width) + viewport.paddingRight + viewport.scrollPaddingRight,
             top: item.top - (viewport.height - item.height) + viewport.paddingBottom + viewport.scrollPaddingBottom,
           };
+          break;
         case 'center':
-          return {
+          target = {
             left: item.left - (viewport.width - item.width) / 2 - viewport.scrollPaddingLeft / 2,
             top: item.top - (viewport.height - item.height) / 2 - viewport.scrollPaddingTop / 2,
           };
-
-        default:
-          return { left: 0, top: 0 };
+          break;
       }
+
+      const maxLeftScroll = viewport.scrollWidth - viewport.width;
+      const maxTopScroll = viewport.scrollHeight - viewport.height;
+      return {
+        left: normalize(target.left, { min: 0, max: maxLeftScroll }),
+        top: normalize(target.top, { min: 0, max: maxTopScroll }),
+      };
     },
     [ref],
   );
