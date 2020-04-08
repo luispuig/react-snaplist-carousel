@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0f231f503114133edb0e18668acc0896",
+    "revision": "f5ad51f2fd04e6cfb1a4437c51961ea6",
     "url": "/react-snaplist-carousel/index.html"
   },
   {
-    "revision": "87d307178b75eb3193b1",
+    "revision": "39311dd50d792aaa5372",
     "url": "/react-snaplist-carousel/static/css/main.d5267ec5.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-snaplist-carousel/static/js/2.c9f6a8f9.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "87d307178b75eb3193b1",
-    "url": "/react-snaplist-carousel/static/js/main.7cfc292f.chunk.js"
+    "revision": "39311dd50d792aaa5372",
+    "url": "/react-snaplist-carousel/static/js/main.a8fa245a.chunk.js"
   },
   {
     "revision": "2a7c83a58b5a126f147e",
