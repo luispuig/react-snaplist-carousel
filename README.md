@@ -110,7 +110,7 @@ export const App = () => {
     ([element]) => element,
   );
   const goToSnapItem = useScroll({ ref: snapList });
-  const isDragging = useDragToScroll({ ref: snapList });
+  const { isDragging } = useDragToScroll({ ref: snapList });
 
   return (
     <SnapList ref={snapList}>
@@ -267,7 +267,7 @@ const selected = useVisibleElements(
   elements => elements[0],
 );
 
-const isDragging = useDragToScroll({ref: snapList, disable: false});
+const { isDragging } = useDragToScroll({ref: snapList, disable: false});
 
 return (
   <>
@@ -297,6 +297,12 @@ return (
   </p>
 );
 ```
+
+Response
+
+- `isDragging`: {boolean}.
+- disable: A function `() => void` to disable the dragToScroll feature.
+- enable: A function `() => void` to enable the dragToScroll feature.
 
 Arguments
 
