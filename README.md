@@ -158,7 +158,7 @@ export const App = () => {
   bottom?: string;
   left?: string;
   } | undefined }: Use this to configure the space to see from the previous/next hidden element. See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding" target="_blank">scroll-padding</a> for more information
-- `hideScrollBar` { boolean }. Optional (default true): Hide/show scrollbars.
+- `hideScrollbar` { boolean }. Optional (default true): Hide/show scrollbars.
 - `ref` { React.RefObject\<HTMLDivElement\> | undefined }: The React.ref to the element required by the hooks.
 - `className` { string | undefined }: 🚑Please, use this only in case of emergency. It allows you to add/overwrite/extend all the CSS properties. If you need this, please consider opening an issue or contribute with a PR to cover your use case.
 
@@ -267,33 +267,33 @@ const selected = useVisibleElements(
   elements => elements[0],
 );
 
-const { isDragging } = useDragToScroll({ref: snapList, disable: false});
+const { isDragging } = useDragToScroll({ ref: snapList, disable: false });
 
 return (
   <>
-  <p>{isDragging ? 'Dragging': 'No dragging}</p>
-  <SnapList ref={snapList}>
-    <SnapItem snapAlign="left">
-      <div
-        onClick={() => goToElement(0)}
-        style={{
-          backgroundColor: selected === 0 ? 'papayawhip' : null,
-        }}
-      >
-        Item 0
-      </div>
-    </SnapItem>
-    <SnapItem snapAlign="left">
-      <div
-        onClick={() => goToElement(1)}
-        style={{
-          backgroundColor: selected === 1 ? 'papayawhip' : null,
-        }}
-      >
-        Item 1
-      </div>
-    </SnapItem>
-  </SnapList>
+    <p>{isDragging ? 'Dragging' : 'No dragging'}</p>
+    <SnapList ref={snapList}>
+      <SnapItem snapAlign="left">
+        <div
+          onClick={() => goToElement(0)}
+          style={{
+            backgroundColor: selected === 0 ? 'papayawhip' : null,
+          }}
+        >
+          Item 0
+        </div>
+      </SnapItem>
+      <SnapItem snapAlign="left">
+        <div
+          onClick={() => goToElement(1)}
+          style={{
+            backgroundColor: selected === 1 ? 'papayawhip' : null,
+          }}
+        >
+          Item 1
+        </div>
+      </SnapItem>
+    </SnapList>
   </p>
 );
 ```

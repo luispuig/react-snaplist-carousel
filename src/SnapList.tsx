@@ -14,7 +14,7 @@ interface CarouselProps {
     bottom?: string;
     left?: string;
   };
-  hideScrollBar?: boolean;
+  hideScrollbar?: boolean;
   disabled?: boolean;
   className?: string;
 }
@@ -27,7 +27,7 @@ const SnapListComponent: React.FC<CarouselProps> = (
     width,
     height,
     scrollPadding,
-    hideScrollBar = true,
+    hideScrollbar = true,
     disabled = false,
     className,
   },
@@ -39,7 +39,7 @@ const SnapListComponent: React.FC<CarouselProps> = (
       styles[`snaplist_${direction}`],
       disabled ? null : styles[`snaplist_active_${direction}`],
       disableScroll ? styles.snaplist_scroll_disabled : styles[`snaplist_scroll_${direction}`],
-      hideScrollBar ? styles.snaplist_hide_scrollBar : null,
+      hideScrollbar ? styles.snaplist_hide_scrollbar : null,
       className,
     )}
     style={{

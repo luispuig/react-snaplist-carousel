@@ -2,12 +2,12 @@
   flex: 1;
 }
 
-.snaplist_hide_scrollBar {
+.snaplist_hide_scrollbar {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
-.snaplist_hide_scrollBar::-webkit-scrollbar {
+.snaplist_hide_scrollbar::-webkit-scrollbar {
   display: none;
 }
 
