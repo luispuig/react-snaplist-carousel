@@ -14,18 +14,32 @@ interface CarouselProps {
     bottom?: string;
     left?: string;
   };
+  hideScrollBar?: boolean;
+  disabled?: boolean;
   className?: string;
 }
 
 const SnapListComponent: React.FC<CarouselProps> = (
-  { children, direction = 'horizontal', disableScroll = false, width, height, scrollPadding, className },
+  {
+    children,
+    direction = 'horizontal',
+    disableScroll = false,
+    width,
+    height,
+    scrollPadding,
+    hideScrollBar = true,
+    disabled = false,
+    className,
+  },
   ref: React.Ref<HTMLDivElement>,
 ) => (
   <div
     className={mergeStyles(
       styles.snaplist,
       styles[`snaplist_${direction}`],
+      disabled ? null : styles[`snaplist_active_${direction}`],
       disableScroll ? styles.snaplist_scroll_disabled : styles[`snaplist_scroll_${direction}`],
+      hideScrollBar ? styles.snaplist_hide_scrollBar : null,
       className,
     )}
     style={{
