@@ -267,33 +267,33 @@ const selected = useVisibleElements(
   elements => elements[0],
 );
 
-const { isDragging } = useDragToScroll({ref: snapList, disable: false});
+const { isDragging } = useDragToScroll({ ref: snapList, disable: false });
 
 return (
   <>
-  <p>{isDragging ? 'Dragging': 'No dragging}</p>
-  <SnapList ref={snapList}>
-    <SnapItem snapAlign="left">
-      <div
-        onClick={() => goToElement(0)}
-        style={{
-          backgroundColor: selected === 0 ? 'papayawhip' : null,
-        }}
-      >
-        Item 0
-      </div>
-    </SnapItem>
-    <SnapItem snapAlign="left">
-      <div
-        onClick={() => goToElement(1)}
-        style={{
-          backgroundColor: selected === 1 ? 'papayawhip' : null,
-        }}
-      >
-        Item 1
-      </div>
-    </SnapItem>
-  </SnapList>
+    <p>{isDragging ? 'Dragging' : 'No dragging'}</p>
+    <SnapList ref={snapList}>
+      <SnapItem snapAlign="left">
+        <div
+          onClick={() => goToElement(0)}
+          style={{
+            backgroundColor: selected === 0 ? 'papayawhip' : null,
+          }}
+        >
+          Item 0
+        </div>
+      </SnapItem>
+      <SnapItem snapAlign="left">
+        <div
+          onClick={() => goToElement(1)}
+          style={{
+            backgroundColor: selected === 1 ? 'papayawhip' : null,
+          }}
+        >
+          Item 1
+        </div>
+      </SnapItem>
+    </SnapList>
   </p>
 );
 ```
