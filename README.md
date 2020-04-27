@@ -158,7 +158,7 @@ export const App = () => {
   bottom?: string;
   left?: string;
   } | undefined }: Use this to configure the space to see from the previous/next hidden element. See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding" target="_blank">scroll-padding</a> for more information
-- `hideScrollBar` { boolean }. Optional (default true): Hide/show scrollbars.
+- `hideScrollbar` { boolean }. Optional (default true): Hide/show scrollbars.
 - `ref` { React.RefObject\<HTMLDivElement\> | undefined }: The React.ref to the element required by the hooks.
 - `className` { string | undefined }: 🚑Please, use this only in case of emergency. It allows you to add/overwrite/extend all the CSS properties. If you need this, please consider opening an issue or contribute with a PR to cover your use case.
 
