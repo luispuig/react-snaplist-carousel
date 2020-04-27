@@ -33,6 +33,10 @@ const getElementPositionY = ($viewport: HTMLElement, $item: HTMLElement): number
 
 const dragThreshold = 2; // distance moved before isDragged is set to true and click on children is disabled
 
+interface Styles extends CSSStyleDeclaration {
+  scrollSnapType: string;
+}
+
 export const useDragToScroll = ({ ref, disabled = false }: { ref: RefObject<HTMLDivElement>; disabled?: boolean }) => {
   const goToChildren = useScroll({ ref });
   const elementPositionsX = useRef<number[]>([]);
@@ -45,6 +49,7 @@ export const useDragToScroll = ({ ref, disabled = false }: { ref: RefObject<HTML
   const startY = useRef(0);
   const slideX = useRef(0);
   const slideY = useRef(0);
+  const originalScrollSnapType = useRef('');
 
   // used to determine whether slider is scrolling. After scrolling ends, reset css classes
   const handleScrolling = useCallback(() => {
@@ -85,7 +90,11 @@ export const useDragToScroll = ({ ref, disabled = false }: { ref: RefObject<HTML
       const distanceMoved = Math.abs(startX.current - (event.pageX - ref.current.offsetLeft));
       if (distanceMoved < dragThreshold) return; // skip further action, when not mouse movement is below threshold, thus no drag detected
       if (timeout.current) clearTimeout(timeout.current);
-      setIsDragging(true);
+      if (!isDragging) {
+        setIsDragging(true);
+        const snapListStyles = window.getComputedStyle(ref.current) as Styles;
+        originalScrollSnapType.current = snapListStyles.scrollSnapType.toString();
+      }
       ref.current.classList.add(styles.snaplist_drag);
 
       const x = event.pageX - ref.current.offsetLeft;
@@ -95,20 +104,22 @@ export const useDragToScroll = ({ ref, disabled = false }: { ref: RefObject<HTML
       const displaceY = y - startY.current;
       ref.current.scrollTop = slideY.current - displaceY;
     },
-    [ref],
+    [isDragging, ref],
   );
 
   const handleMouseUp = useCallback(() => {
     if (!ref.current) return;
     isDown.current = false;
     if (!isDragging) return;
+    ref.current.addEventListener('scroll', handleScrolling);
+
+    if (originalScrollSnapType.current === 'none') return;
 
     const dragEndPositionX = ref.current.scrollLeft;
     const dragEndPositionY = ref.current.scrollTop;
     const scrollTargetX = getClosest(elementPositionsX.current, dragEndPositionX);
     const scrollTargetY = getClosest(elementPositionsY.current, dragEndPositionY);
 
-    ref.current.addEventListener('scroll', handleScrolling);
     const target =
       scrollTargetX > 0
         ? elementPositionsX.current.indexOf(scrollTargetX)
@@ -120,7 +131,6 @@ export const useDragToScroll = ({ ref, disabled = false }: { ref: RefObject<HTML
     event => {
       // we need this to prevent click events being fired on children
       if (!isDragging) return;
-
       event.stopPropagation();
       setIsDragging(false);
     },
@@ -160,5 +170,5 @@ export const useDragToScroll = ({ ref, disabled = false }: { ref: RefObject<HTML
     return removeEventListeners;
   }, [ref, registerEventListeners, removeEventListeners, disabled]);
 
-  return isDragging;
+  return { isDragging, disable: removeEventListeners, enable: registerEventListeners };
 };

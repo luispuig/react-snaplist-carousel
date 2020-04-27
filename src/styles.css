@@ -1,19 +1,32 @@
 .snaplist {
   flex: 1;
+}
+
+.snaplist_hide_scrollBar {
   scrollbar-width: none;
   -ms-overflow-style: none;
+}
+
+.snaplist_hide_scrollBar::-webkit-scrollbar {
+  display: none;
 }
 
 .snaplist_horizontal {
   display: flex;
   flex-direction: row;
-  scroll-snap-type: x mandatory;
   max-width: 100%;
 }
 
 .snaplist_vertical {
-  scroll-snap-type: y mandatory;
   max-height: 100%;
+}
+
+.snaplist_active_horizontal {
+  scroll-snap-type: x mandatory;
+}
+
+.snaplist_active_vertical {
+  scroll-snap-type: y mandatory;
 }
 
 .snaplist_scroll_disabled {
@@ -31,10 +44,6 @@
   overflow-x: hidden;
 }
 
-.snaplist::-webkit-scrollbar {
-  display: none;
-}
-
 .snapitem {
   flex: 1;
   display: flex;
@@ -43,12 +52,9 @@
   flex-basis: auto;
 }
 
-.snaplist:last-child::after {
-  content: '.';
-  font-size: 0px;
-  width: 0px;
-  max-width: 0;
-  border-left: solid 1px transparent;
+.snaplist::after {
+  content: '';
+  flex: 0 0 1px;
 }
 
 .snapitem_align_center {

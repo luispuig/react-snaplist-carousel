@@ -22,7 +22,7 @@ export const Horizontal = () => {
 
   const visible = useVisibleElements({ debounce: 10, ref: snapList }, ([element]) => element);
   const goToChildren = useScroll({ ref: snapList });
-  const isDragging = useDragToScroll({ ref: snapList });
+  const { isDragging } = useDragToScroll({ ref: snapList });
 
   return (
     <div
