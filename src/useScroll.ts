@@ -91,7 +91,7 @@ export const useScroll = ({ ref }: { ref: RefObject<any> }) => {
     (element: number) => {
       const scrollTarget = getScrollFor(element);
       if (scrollTarget) {
-        smoothScroll(ref.current, scrollTarget, 800);
+        smoothScroll(ref.current, scrollTarget, 600);
       }
     },
     [getScrollFor, ref],
