@@ -14,7 +14,7 @@ export const mapStyles = ($item: HTMLElement) => {
   const paddingRight = parseInt(styles.paddingRight || '');
   const paddingTop = parseInt(styles.paddingTop || '');
   const paddingBottom = parseInt(styles.paddingBottom || '');
-  const [snapAlign] = styles.scrollSnapAlign.split(' ');
+  const [snapAlign] = (typeof styles.scrollSnapAlign === 'string' && styles.scrollSnapAlign.split(' ')) || [];
   const scrollPaddingLeft = parseInt(styles.scrollPaddingLeft || '');
   const scrollPaddingRight = parseInt(styles.scrollPaddingRight || '');
   const scrollPaddingTop = parseInt(styles.scrollPaddingTop || '');
