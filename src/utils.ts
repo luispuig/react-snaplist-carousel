@@ -7,18 +7,19 @@ interface Styles extends CSSStyleDeclaration {
   scrollPaddingTop?: string;
   scrollPaddingBottom?: string;
 }
+const extractStyleProperty = (property: keyof Styles, styles: Styles): string => styles[property] || '';
 
 export const mapStyles = ($item: HTMLElement) => {
   const styles = window.getComputedStyle($item) as Styles;
-  const paddingLeft = parseInt(styles.paddingLeft || '');
-  const paddingRight = parseInt(styles.paddingRight || '');
-  const paddingTop = parseInt(styles.paddingTop || '');
-  const paddingBottom = parseInt(styles.paddingBottom || '');
-  const [snapAlign] = (styles.scrollSnapAlign || '').split(' ');
-  const scrollPaddingLeft = parseInt(styles.scrollPaddingLeft || '');
-  const scrollPaddingRight = parseInt(styles.scrollPaddingRight || '');
-  const scrollPaddingTop = parseInt(styles.scrollPaddingTop || '');
-  const scrollPaddingBottom = parseInt(styles.scrollPaddingBottom || '');
+  const paddingLeft = parseInt(extractStyleProperty('paddingLeft', styles));
+  const paddingRight = parseInt(extractStyleProperty('paddingRight', styles));
+  const paddingTop = parseInt(extractStyleProperty('paddingTop', styles));
+  const paddingBottom = parseInt(extractStyleProperty('paddingBottom', styles));
+  const [snapAlign] = extractStyleProperty('scrollSnapAlign', styles).split(' ');
+  const scrollPaddingLeft = parseInt(extractStyleProperty('scrollPaddingLeft', styles));
+  const scrollPaddingRight = parseInt(extractStyleProperty('scrollPaddingRight', styles));
+  const scrollPaddingTop = parseInt(extractStyleProperty('scrollPaddingTop', styles));
+  const scrollPaddingBottom = parseInt(extractStyleProperty('scrollPaddingBottom', styles));
   return {
     paddingLeft,
     paddingRight,
