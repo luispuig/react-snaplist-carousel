@@ -11,25 +11,16 @@ const extractStyleProperty = (property: keyof Styles, styles: Styles): string =>
 
 export const mapStyles = ($item: HTMLElement) => {
   const styles = window.getComputedStyle($item) as Styles;
-  const paddingLeft = parseInt(extractStyleProperty('paddingLeft', styles));
-  const paddingRight = parseInt(extractStyleProperty('paddingRight', styles));
-  const paddingTop = parseInt(extractStyleProperty('paddingTop', styles));
-  const paddingBottom = parseInt(extractStyleProperty('paddingBottom', styles));
-  const [snapAlign] = extractStyleProperty('scrollSnapAlign', styles).split(' ');
-  const scrollPaddingLeft = parseInt(extractStyleProperty('scrollPaddingLeft', styles));
-  const scrollPaddingRight = parseInt(extractStyleProperty('scrollPaddingRight', styles));
-  const scrollPaddingTop = parseInt(extractStyleProperty('scrollPaddingTop', styles));
-  const scrollPaddingBottom = parseInt(extractStyleProperty('scrollPaddingBottom', styles));
   return {
-    paddingLeft,
-    paddingRight,
-    paddingTop,
-    paddingBottom,
-    snapAlign,
-    scrollPaddingLeft,
-    scrollPaddingRight,
-    scrollPaddingTop,
-    scrollPaddingBottom,
+    paddingLeft: parseInt(extractStyleProperty('paddingLeft', styles)),
+    paddingRight: parseInt(extractStyleProperty('paddingRight', styles)),
+    paddingTop: parseInt(extractStyleProperty('paddingTop', styles)),
+    paddingBottom: parseInt(extractStyleProperty('paddingBottom', styles)),
+    snapAlign: extractStyleProperty('scrollSnapAlign', styles).split(' '),
+    scrollPaddingLeft: parseInt(extractStyleProperty('scrollPaddingLeft', styles)),
+    scrollPaddingRight: parseInt(extractStyleProperty('scrollPaddingRight', styles)),
+    scrollPaddingTop: parseInt(extractStyleProperty('scrollPaddingTop', styles)),
+    scrollPaddingBottom: parseInt(extractStyleProperty('scrollPaddingBottom', styles)),
   };
 };
 
