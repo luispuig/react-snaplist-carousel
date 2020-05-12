@@ -26,11 +26,16 @@ const smoothScrollPolyfill = ({
     const percentage = elapsed / duration;
     if (interrupt) return;
     if (percentage > 1) {
+      node.scrollLeft = scrollTarget.left;
+      node.scrollTop = scrollTarget.top;
       cleanup();
       return;
     }
-    node.scrollLeft = easingOutQuint(elapsed, offsetLeft, gapHorizontal, duration);
-    node.scrollTop = easingOutQuint(elapsed, offsetTop, gapVertical, duration);
+    const nextScrollLeft = easingOutQuint(elapsed, offsetLeft, gapHorizontal, duration);
+    const nextScrollTop = easingOutQuint(elapsed, offsetTop, gapVertical, duration);
+
+    node.scrollLeft = Math.abs(scrollTarget.left - nextScrollLeft) <= 1 ? scrollTarget.left : nextScrollLeft;
+    node.scrollTop = Math.abs(scrollTarget.top - nextScrollTop) <= 1 ? scrollTarget.top : nextScrollTop;
     requestAnimationFrame(step);
   };
 
