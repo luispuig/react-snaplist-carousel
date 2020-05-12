@@ -1,34 +1,26 @@
 export const mergeStyles = (...classnames: (string | null | undefined)[]) => classnames.filter(Boolean).join(' ');
 
 interface Styles extends CSSStyleDeclaration {
-  scrollSnapAlign: string;
-  scrollPaddingLeft: string;
-  scrollPaddingRight: string;
-  scrollPaddingTop: string;
-  scrollPaddingBottom: string;
+  scrollSnapAlign?: string;
+  scrollPaddingLeft?: string;
+  scrollPaddingRight?: string;
+  scrollPaddingTop?: string;
+  scrollPaddingBottom?: string;
 }
+const extractStyleProperty = (property: keyof Styles, styles: Styles): string => styles[property] || '';
 
 export const mapStyles = ($item: HTMLElement) => {
   const styles = window.getComputedStyle($item) as Styles;
-  const paddingLeft = parseInt(styles.paddingLeft || '');
-  const paddingRight = parseInt(styles.paddingRight || '');
-  const paddingTop = parseInt(styles.paddingTop || '');
-  const paddingBottom = parseInt(styles.paddingBottom || '');
-  const [snapAlign] = styles.scrollSnapAlign.split(' ');
-  const scrollPaddingLeft = parseInt(styles.scrollPaddingLeft || '');
-  const scrollPaddingRight = parseInt(styles.scrollPaddingRight || '');
-  const scrollPaddingTop = parseInt(styles.scrollPaddingTop || '');
-  const scrollPaddingBottom = parseInt(styles.scrollPaddingBottom || '');
   return {
-    paddingLeft,
-    paddingRight,
-    paddingTop,
-    paddingBottom,
-    snapAlign,
-    scrollPaddingLeft,
-    scrollPaddingRight,
-    scrollPaddingTop,
-    scrollPaddingBottom,
+    paddingLeft: parseInt(extractStyleProperty('paddingLeft', styles)),
+    paddingRight: parseInt(extractStyleProperty('paddingRight', styles)),
+    paddingTop: parseInt(extractStyleProperty('paddingTop', styles)),
+    paddingBottom: parseInt(extractStyleProperty('paddingBottom', styles)),
+    snapAlign: extractStyleProperty('scrollSnapAlign', styles).split(' '),
+    scrollPaddingLeft: parseInt(extractStyleProperty('scrollPaddingLeft', styles)),
+    scrollPaddingRight: parseInt(extractStyleProperty('scrollPaddingRight', styles)),
+    scrollPaddingTop: parseInt(extractStyleProperty('scrollPaddingTop', styles)),
+    scrollPaddingBottom: parseInt(extractStyleProperty('scrollPaddingBottom', styles)),
   };
 };
 
