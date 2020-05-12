@@ -16,7 +16,7 @@ export const mapStyles = ($item: HTMLElement) => {
     paddingRight: parseInt(extractStyleProperty('paddingRight', styles)),
     paddingTop: parseInt(extractStyleProperty('paddingTop', styles)),
     paddingBottom: parseInt(extractStyleProperty('paddingBottom', styles)),
-    snapAlign: extractStyleProperty('scrollSnapAlign', styles).split(' '),
+    snapAlign: extractStyleProperty('scrollSnapAlign', styles).split(' ')[0],
     scrollPaddingLeft: parseInt(extractStyleProperty('scrollPaddingLeft', styles)),
     scrollPaddingRight: parseInt(extractStyleProperty('scrollPaddingRight', styles)),
     scrollPaddingTop: parseInt(extractStyleProperty('scrollPaddingTop', styles)),
