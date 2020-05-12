@@ -49,7 +49,7 @@ export const useDragToScroll = ({ ref, disabled = false }: { ref: RefObject<HTML
   const startY = useRef(0);
   const slideX = useRef(0);
   const slideY = useRef(0);
-  const originalScrollSnapType = useRef('');
+  const originalScrollSnapType = useRef<string | undefined>(undefined);
 
   // used to determine whether slider is scrolling. After scrolling ends, reset css classes
   const handleScrolling = useCallback(() => {
@@ -66,7 +66,7 @@ export const useDragToScroll = ({ ref, disabled = false }: { ref: RefObject<HTML
       ref.current.classList.remove(styles.snaplist_drag);
       ref.current.scrollLeft = currentX;
       ref.current.scrollTop = currentY;
-    }, 100) as any;
+    }, 50) as any;
   }, [ref, timeout]);
 
   const handleMouseDown = useCallback(
@@ -93,7 +93,9 @@ export const useDragToScroll = ({ ref, disabled = false }: { ref: RefObject<HTML
       if (!isDragging) {
         setIsDragging(true);
         const snapListStyles = window.getComputedStyle(ref.current) as Styles;
-        originalScrollSnapType.current = snapListStyles.scrollSnapType.toString();
+        if (originalScrollSnapType.current === undefined) {
+          originalScrollSnapType.current = snapListStyles.scrollSnapType.toString();
+        }
       }
       ref.current.classList.add(styles.snaplist_drag);
 
