@@ -328,6 +328,11 @@ This an internal util function used by `useDragToScroll` that can be useful for 
 
 ## Changelog
 
+### Version 4
+
+- Fix decimal pixel problems
+- **Breakchange** useDragToScroll is returning `{ isDragging }` instead of the boolean. https://github.com/luispuig/react-snaplist-carousel/commit/a2d23d6b804dcab1da9520db8edc746c6837f23e#diff-e3457effa5fa347d185fdd0d08ba3209R173
+
 ### Version 3
 
 - Added useDragToScroll
