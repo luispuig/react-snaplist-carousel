@@ -32,8 +32,8 @@ export const getVisibleChildren = ($viewport?: HTMLDivElement | null) => {
   for (let index = 0; index < $items.length; index++) {
     const $item = $items[index] as HTMLElement;
     const item = mapItem({ $item, viewport });
-    const isVisibleHorizontally = item.left >= viewport.left && item.right <= viewport.right;
-    const isVisibleVertically = item.top >= viewport.top && item.bottom <= viewport.bottom;
+    const isVisibleHorizontally = item.left >= Math.floor(viewport.left) && item.right <= Math.ceil(viewport.right);
+    const isVisibleVertically = item.top >= Math.floor(viewport.top) && item.bottom <= Math.ceil(viewport.bottom);
     const isInCenterHorizontally = item.left <= viewport.centerHorizontal && item.right >= viewport.centerHorizontal;
     const isInCenterVertically = item.top <= viewport.centerVertical && item.bottom >= viewport.centerVertical;
     if (isVisibleHorizontally && isVisibleVertically) {
