@@ -88,10 +88,15 @@ export const useScroll = ({ ref }: { ref: RefObject<any> }) => {
   );
 
   const goTo = useCallback(
-    (element: number) => {
+    (element: number, { animationEnabled }: { animationEnabled: boolean } = { animationEnabled: true }) => {
+      if (!ref.current) return;
       const scrollTarget = getScrollFor(element);
       if (scrollTarget) {
-        smoothScroll(ref.current, scrollTarget, 350);
+        if (animationEnabled) {
+          smoothScroll(ref.current, scrollTarget, 350);
+        } else {
+          ref.current.scrollTo({ left: scrollTarget.left, top: scrollTarget.top });
+        }
       }
     },
     [getScrollFor, ref],
