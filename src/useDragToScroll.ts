@@ -72,7 +72,6 @@ export const useDragToScroll = ({ ref, disabled = false }: { ref: RefObject<HTML
   const handleMouseDown = useCallback(
     event => {
       if (!ref.current) return;
-      event.preventDefault();
       isDown.current = true;
       startX.current = event.pageX - ref.current.offsetLeft;
       slideX.current = ref.current.scrollLeft;

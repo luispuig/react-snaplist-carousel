@@ -74,6 +74,63 @@ export const App = () => (
 );
 ```
 
+## A11y Example
+
+```tsx
+import * as React from 'react';
+
+import { SnapList, SnapItem } from 'react-snaplist-carousel';
+
+const MyItem = ({ children }) => (
+  <div style={{ width: '70vw', height: 200, background: '#cccccc' }}>
+    {children}
+  </div>
+);
+
+export const App = () => {
+  const snapList = useRef(null);
+  const lastSnapItem = useRef(null);
+  const goToSnapItem = useScroll({ ref: snapList });
+  return (
+    <SnapList
+      ref={snapList}
+      tabIndex={0} // so it can receive focus and can be scrolled with keyboard
+      role="region" // context for screen readers
+      aria-label="my awesome snaplist" // for screen readers to read out loud on focus
+    >
+      <SnapItem margin={{ left: '15px', right: '15px' }} snapAlign="center">
+        <MyItem>Item 0</MyItem>
+        <button
+          onClick={() => {
+            goToSnapItem(4);
+            lastSnapItem.current?.focus();
+          }}
+        >
+          go to last item
+        </button>
+      </SnapItem>
+      <SnapItem margin={{ left: '15px', right: '15px' }} snapAlign="center">
+        <MyItem>Item 1</MyItem>
+      </SnapItem>
+      <SnapItem margin={{ left: '15px', right: '15px' }} snapAlign="center">
+        <MyItem>Item 2</MyItem>
+      </SnapItem>
+      <SnapItem margin={{ left: '15px', right: '15px' }} snapAlign="center">
+        <MyItem>Item 3</MyItem>
+      </SnapItem>
+      <SnapItem
+        margin={{ left: '15px', right: '15px' }}
+        snapAlign="center"
+        ref={lastSnapItem}
+        tabIndex={-1}
+      >
+        <MyItem>Item 4</MyItem>
+      </SnapItem>
+    </SnapList>
+  );
+};
+```
+
 ## Advanced Example
 
 ```tsx
@@ -176,6 +233,7 @@ export const App = () => {
   bottom?: string;
   left?: string;
   } | undefined }: The margin is used to set the separation between the items. You can use different margin for the first and last item to get better results.
+- `ref` { React.RefObject\<HTMLDivElement\> | undefined }. You can use it to programatically focus the `SnapItem` for example.
 - `className` { string | undefined }: 🚑Please, use this only in case of emergency. It allows you to add/overwrite/extend all the CSS properties. If you need this, please consider opening an issue or contribute with a PR to cover your use case.
 
 \* _Required fields_
@@ -339,6 +397,13 @@ This an internal util function used by `useDragToScroll` that can be useful for 
 - **Breakchange** useDragToScroll is returning `{ isDragging }` instead of the boolean. https://github.com/luispuig/react-snaplist-carousel/commit/a2d23d6b804dcab1da9520db8edc746c6837f23e#diff-e3457effa5fa347d185fdd0d08ba3209R173
 - Version `4.1.0`. Fix support for macOS Big Sur
 - Version `4.2.0`. Add useScroll / goTo / animationEnabled option. Usefull to scroll on component mount.
+- Version `4.3.0`.
+  - Removed `event.preventDefault()` form `mouseDown` so focus event can be propagated up in the DOM tree.
+  - `<SnapList>` and `<SnapItem>` now accept all the `HTMLDivElement` properties.
+  - `<SnapItem>` now accepts a `ref` property.
+  - New className attached so it is easier to target it through CSS:
+    - `<SnapList>` has a `.snaplist`.
+    - `<SnapItem>` has a `.snapitem`.
 
 ### Version 3
 
