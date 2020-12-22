@@ -3,7 +3,7 @@ import { mergeStyles } from './utils';
 
 import styles from './styles.css';
 
-interface CarouselProps {
+interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
   direction: 'horizontal' | 'vertical';
   disableScroll?: boolean;
   width?: string;
@@ -30,11 +30,13 @@ const SnapListComponent: React.FC<CarouselProps> = (
     hideScrollbar = true,
     disabled = false,
     className,
+    ...props
   },
   ref: React.Ref<HTMLDivElement>,
 ) => (
   <div
     className={mergeStyles(
+      'snaplist',
       styles.snaplist,
       styles[`snaplist_${direction}`],
       disabled ? null : styles[`snaplist_active_${direction}`],
@@ -51,6 +53,7 @@ const SnapListComponent: React.FC<CarouselProps> = (
       scrollPaddingLeft: scrollPadding?.left ?? '0px',
     }}
     ref={ref}
+    {...props}
   >
     {children}
   </div>
@@ -60,7 +63,7 @@ type WithChildren<T> = T & { children?: React.ReactNode };
 
 export const SnapList = React.forwardRef<HTMLDivElement, WithChildren<CarouselProps>>(SnapListComponent);
 
-export const SnapItem: React.FC<{
+interface SnapItemProps extends React.HTMLAttributes<HTMLDivElement> {
   margin?: {
     top?: string;
     right?: string;
@@ -72,9 +75,15 @@ export const SnapItem: React.FC<{
   snapAlign: 'start' | 'center' | 'end' | 'none';
   forceStop?: boolean;
   className?: string;
-}> = ({ children, margin, snapAlign = 'center', forceStop = false, width, height, className }) => (
+}
+
+const SnapItemComponent: React.FC<SnapItemProps> = (
+  { children, margin, snapAlign = 'center', forceStop = false, width, height, className, ...props },
+  ref: React.Ref<HTMLDivElement>,
+) => (
   <div
     className={mergeStyles(
+      'snapitem',
       styles.snapitem,
       styles[`snapitem_align_${snapAlign}`],
       forceStop ? styles.snapitem_forcestop : null,
@@ -88,7 +97,11 @@ export const SnapItem: React.FC<{
       width,
       height,
     }}
+    ref={ref}
+    {...props}
   >
     {children}
   </div>
 );
+
+export const SnapItem = React.forwardRef<HTMLDivElement, WithChildren<SnapItemProps>>(SnapItemComponent);
