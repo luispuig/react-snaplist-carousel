@@ -81,11 +81,15 @@ import * as React from 'react';
 
 import { SnapList, SnapItem } from 'react-snaplist-carousel';
 
-const MyItem = ({ children }) => (
-  <div style={{ width: '70vw', height: 200, background: '#cccccc' }}>
+const MyItem = React.forwardRef(({ children, ...props }, ref) => (
+  <div
+    style={{ width: '70vw', height: 200, background: '#cccccc' }}
+    ref={ref}
+    {...props}
+  >
     {children}
   </div>
-);
+));
 
 export const App = () => {
   const snapList = useRef(null);
@@ -118,13 +122,10 @@ export const App = () => {
       <SnapItem margin={{ left: '15px', right: '15px' }} snapAlign="center">
         <MyItem>Item 3</MyItem>
       </SnapItem>
-      <SnapItem
-        margin={{ left: '15px', right: '15px' }}
-        snapAlign="center"
-        ref={lastSnapItem}
-        tabIndex={-1}
-      >
-        <MyItem>Item 4</MyItem>
+      <SnapItem margin={{ left: '15px', right: '15px' }} snapAlign="center">
+        <MyItem ref={lastSnapItem} tabIndex={-1}>
+          Item 4
+        </MyItem>
       </SnapItem>
     </SnapList>
   );
