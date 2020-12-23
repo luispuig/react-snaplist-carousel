@@ -399,8 +399,7 @@ This an internal util function used by `useDragToScroll` that can be useful for 
 - Version `4.2.0`. Add useScroll / goTo / animationEnabled option. Usefull to scroll on component mount.
 - Version `4.3.0`.
   - Removed `event.preventDefault()` form `mouseDown` so focus event can be propagated up in the DOM tree.
-  - `<SnapList>` and `<SnapItem>` now accept all the `HTMLDivElement` properties.
-  - `<SnapItem>` now accepts a `ref` property.
+  - `<SnapList>` now accept all the `HTMLDivElement` properties.
   - New className attached so it is easier to target it through CSS:
     - `<SnapList>` has a `.snaplist`.
     - `<SnapItem>` has a `.snapitem`.
