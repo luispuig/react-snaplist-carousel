@@ -63,7 +63,7 @@ type WithChildren<T> = T & { children?: React.ReactNode };
 
 export const SnapList = React.forwardRef<HTMLDivElement, WithChildren<CarouselProps>>(SnapListComponent);
 
-interface SnapItemProps extends React.HTMLAttributes<HTMLDivElement> {
+export const SnapItem: React.FC<{
   margin?: {
     top?: string;
     right?: string;
@@ -75,12 +75,7 @@ interface SnapItemProps extends React.HTMLAttributes<HTMLDivElement> {
   snapAlign: 'start' | 'center' | 'end' | 'none';
   forceStop?: boolean;
   className?: string;
-}
-
-const SnapItemComponent: React.FC<SnapItemProps> = (
-  { children, margin, snapAlign = 'center', forceStop = false, width, height, className, ...props },
-  ref: React.Ref<HTMLDivElement>,
-) => (
+}> = ({ children, margin, snapAlign = 'center', forceStop = false, width, height, className }) => (
   <div
     className={mergeStyles(
       'snapitem',
@@ -97,11 +92,7 @@ const SnapItemComponent: React.FC<SnapItemProps> = (
       width,
       height,
     }}
-    ref={ref}
-    {...props}
   >
     {children}
   </div>
 );
-
-export const SnapItem = React.forwardRef<HTMLDivElement, WithChildren<SnapItemProps>>(SnapItemComponent);
