@@ -234,7 +234,6 @@ export const App = () => {
   bottom?: string;
   left?: string;
   } | undefined }: The margin is used to set the separation between the items. You can use different margin for the first and last item to get better results.
-- `ref` { React.RefObject\<HTMLDivElement\> | undefined }. You can use it to programatically focus the `SnapItem` for example.
 - `className` { string | undefined }: 🚑Please, use this only in case of emergency. It allows you to add/overwrite/extend all the CSS properties. If you need this, please consider opening an issue or contribute with a PR to cover your use case.
 
 \* _Required fields_
