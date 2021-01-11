@@ -36,16 +36,72 @@ export const Menu = ({ onSelect }) => {
       <b>Examples</b>
       <div className={styles.examples}>
         <div className={styles.example}>
-          <img src={horizontal} alt="horizontal-example" width="100%" onClick={() => onSelect(1)} />
+          <img
+            src={horizontal}
+            alt="horizontal-example"
+            width="100%"
+            onClick={() => onSelect(1)}
+            tabIndex={0}
+            role="button"
+            onKeyDown={e => {
+              if (['Enter', ' '].includes(e.key)) {
+                e.preventDefault();
+                onSelect(1);
+              }
+            }}
+          />
           <div className={styles.exampleTitle}>Horizontal</div>
         </div>
         <div className={styles.example}>
-          <img src={vertical} alt="vertical-example" width="100%" onClick={() => onSelect(2)} />
+          <img
+            src={vertical}
+            alt="vertical-example"
+            width="100%"
+            onClick={() => onSelect(2)}
+            tabIndex={0}
+            role="button"
+            onKeyDown={e => {
+              if (['Enter', ' '].includes(e.key)) {
+                e.preventDefault();
+                onSelect(2);
+              }
+            }}
+          />
           <div className={styles.exampleTitle}>Vertical</div>
         </div>
         <div className={styles.example}>
-          <img src={list} alt="list-example" width="100%" onClick={() => onSelect(3)} />
+          <img
+            src={list}
+            alt="list-example"
+            width="100%"
+            onClick={() => onSelect(3)}
+            tabIndex={0}
+            role="button"
+            onKeyDown={e => {
+              if (['Enter', ' '].includes(e.key)) {
+                e.preventDefault();
+                onSelect(3);
+              }
+            }}
+          />
           <div className={styles.exampleTitle}>List</div>
+        </div>
+        <div className={styles.example}>
+          <img
+            src={list}
+            alt="accessibility-example"
+            width="100%"
+            onClick={() => onSelect(4)}
+            tabIndex={0}
+            role="button"
+            onKeyDown={e => {
+              if (['Enter', ' '].includes(e.key)) {
+                e.preventDefault();
+                onSelect(4);
+              }
+            }}
+          />
+          <div className={styles.exampleTitle}>A11y</div>
         </div>
       </div>
     </div>

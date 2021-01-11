@@ -7,7 +7,8 @@ interface Styles extends CSSStyleDeclaration {
   scrollPaddingTop?: string;
   scrollPaddingBottom?: string;
 }
-const extractStyleProperty = (property: keyof Styles, styles: Styles): string => styles[property] || '';
+const extractStyleProperty = (property: keyof Styles, styles: Styles): string =>
+  styles[property] === undefined ? '' : String(styles[property]);
 
 export const mapStyles = ($item: HTMLElement) => {
   const styles = window.getComputedStyle($item) as Styles;
