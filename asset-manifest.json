@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/react-snaplist-carousel/static/css/main.d5267ec5.chunk.css",
-    "main.js": "/react-snaplist-carousel/static/js/main.6f1d7010.chunk.js",
-    "main.js.map": "/react-snaplist-carousel/static/js/main.6f1d7010.chunk.js.map",
+    "main.css": "/react-snaplist-carousel/static/css/main.c7a42da6.chunk.css",
+    "main.js": "/react-snaplist-carousel/static/js/main.b5dc05a8.chunk.js",
+    "main.js.map": "/react-snaplist-carousel/static/js/main.b5dc05a8.chunk.js.map",
     "runtime-main.js": "/react-snaplist-carousel/static/js/runtime-main.8698dc11.js",
     "runtime-main.js.map": "/react-snaplist-carousel/static/js/runtime-main.8698dc11.js.map",
-    "static/js/2.c9f6a8f9.chunk.js": "/react-snaplist-carousel/static/js/2.c9f6a8f9.chunk.js",
-    "static/js/2.c9f6a8f9.chunk.js.map": "/react-snaplist-carousel/static/js/2.c9f6a8f9.chunk.js.map",
+    "static/js/2.6f1341d4.chunk.js": "/react-snaplist-carousel/static/js/2.6f1341d4.chunk.js",
+    "static/js/2.6f1341d4.chunk.js.map": "/react-snaplist-carousel/static/js/2.6f1341d4.chunk.js.map",
     "index.html": "/react-snaplist-carousel/index.html",
-    "precache-manifest.d8f1ab05eca7fc8607d75b25b15e9f7d.js": "/react-snaplist-carousel/precache-manifest.d8f1ab05eca7fc8607d75b25b15e9f7d.js",
+    "precache-manifest.819964ffbf07cd9737da3370d8722f5b.js": "/react-snaplist-carousel/precache-manifest.819964ffbf07cd9737da3370d8722f5b.js",
     "service-worker.js": "/react-snaplist-carousel/service-worker.js",
-    "static/css/main.d5267ec5.chunk.css.map": "/react-snaplist-carousel/static/css/main.d5267ec5.chunk.css.map",
-    "static/js/2.c9f6a8f9.chunk.js.LICENSE.txt": "/react-snaplist-carousel/static/js/2.c9f6a8f9.chunk.js.LICENSE.txt",
+    "static/css/main.c7a42da6.chunk.css.map": "/react-snaplist-carousel/static/css/main.c7a42da6.chunk.css.map",
+    "static/js/2.6f1341d4.chunk.js.LICENSE.txt": "/react-snaplist-carousel/static/js/2.6f1341d4.chunk.js.LICENSE.txt",
     "static/media/back-arrow.03fc9a42.svg": "/react-snaplist-carousel/static/media/back-arrow.03fc9a42.svg",
     "static/media/dots.d46c9feb.svg": "/react-snaplist-carousel/static/media/dots.d46c9feb.svg",
     "static/media/forward-arrow.934c34b2.svg": "/react-snaplist-carousel/static/media/forward-arrow.934c34b2.svg",
@@ -22,8 +22,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.8698dc11.js",
-    "static/js/2.c9f6a8f9.chunk.js",
-    "static/css/main.d5267ec5.chunk.css",
-    "static/js/main.6f1d7010.chunk.js"
+    "static/js/2.6f1341d4.chunk.js",
+    "static/css/main.c7a42da6.chunk.css",
+    "static/js/main.b5dc05a8.chunk.js"
   ]
 }
