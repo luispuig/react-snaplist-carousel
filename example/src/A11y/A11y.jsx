@@ -63,7 +63,6 @@ const List = ({ id }) => {
               }}
               onClick={() => {
                 goToChildren(14);
-                snapItem14.current && snapItem14.current.focus();
               }}
             >
               go to last
