@@ -403,6 +403,7 @@ This an internal util function used by `useDragToScroll` that can be useful for 
   - New className attached so it is easier to target it through CSS:
     - `<SnapList>` has a `.snaplist`.
     - `<SnapItem>` has a `.snapitem`.
+- Version `4.4.0`. Added rtl support to the useScroll hook. Thanks to @dmvakh
 
 ### Version 3
 
