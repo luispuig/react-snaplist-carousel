@@ -122,7 +122,7 @@ export const useDragToScroll = ({ ref, disabled = false }: { ref: RefObject<HTML
     const scrollTargetY = getClosest(elementPositionsY.current, dragEndPositionY);
 
     const target =
-      scrollTargetX > 0
+      scrollTargetX !== 0
         ? elementPositionsX.current.indexOf(scrollTargetX)
         : elementPositionsY.current.indexOf(scrollTargetY);
     goToChildren(target);

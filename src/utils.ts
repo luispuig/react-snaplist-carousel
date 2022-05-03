@@ -22,6 +22,7 @@ export const mapStyles = ($item: HTMLElement) => {
     scrollPaddingRight: parseInt(extractStyleProperty('scrollPaddingRight', styles)),
     scrollPaddingTop: parseInt(extractStyleProperty('scrollPaddingTop', styles)),
     scrollPaddingBottom: parseInt(extractStyleProperty('scrollPaddingBottom', styles)),
+    direction: styles.direction,
   };
 };
 

@@ -12,8 +12,9 @@ const toArray = ($items: HTMLCollection) => {
   return children;
 };
 
-const normalize = (value: number, { min, max }: { min: number; max: number }) => {
-  return Math.min(max, Math.max(min, value));
+const normalize = (value: number, { min, max }: { min: number; max: number }, direction?: string) => {
+  var value_ = direction === 'rtl'? Math.min(min, value) : Math.max(min, value);
+  return Math.min(max, value_);
 };
 export const useScroll = ({ ref }: { ref: RefObject<any> }) => {
   const getScrollFor = useCallback(
@@ -80,7 +81,7 @@ export const useScroll = ({ ref }: { ref: RefObject<any> }) => {
       const maxLeftScroll = viewport.scrollWidth - viewport.width;
       const maxTopScroll = viewport.scrollHeight - viewport.height;
       return {
-        left: normalize(target.left, { min: 0, max: maxLeftScroll }),
+        left: normalize(target.left, { min: 0, max: maxLeftScroll }, viewportStyles.direction),
         top: normalize(target.top, { min: 0, max: maxTopScroll }),
       };
     },
