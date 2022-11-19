@@ -65,7 +65,7 @@
     "prettier-eslint": "^9.0.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-scripts-ts": "^2.16.0",
+    "react-scripts-ts": "^4.0.8",
     "rollup": "^0.62.0",
     "rollup-plugin-babel": "^3.0.7",
     "rollup-plugin-commonjs": "^9.1.3",
