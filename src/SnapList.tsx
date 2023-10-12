@@ -6,6 +6,7 @@ import styles from './styles.css';
 interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
   direction: 'horizontal' | 'vertical';
   disableScroll?: boolean;
+  snapType?: 'mandatory' | 'proximity';
   width?: string;
   height?: string;
   scrollPadding?: {
@@ -24,40 +25,50 @@ const SnapListComponent: React.FC<CarouselProps> = (
     children,
     direction = 'horizontal',
     disableScroll = false,
+    snapType = 'mandatory',
     width,
     height,
     scrollPadding,
     hideScrollbar = true,
     disabled = false,
     className,
+    style,
     ...props
   },
   ref: React.Ref<HTMLDivElement>,
-) => (
-  <div
-    className={mergeStyles(
-      'snaplist',
-      styles.snaplist,
-      styles[`snaplist_${direction}`],
-      disabled ? null : styles[`snaplist_active_${direction}`],
-      disableScroll ? styles.snaplist_scroll_disabled : styles[`snaplist_scroll_${direction}`],
-      hideScrollbar ? styles.snaplist_hide_scrollbar : null,
-      className,
-    )}
-    style={{
+) => {
+  const dynamicStyles = React.useMemo(
+    () => ({
       width,
       height,
       scrollPaddingTop: scrollPadding?.top ?? '0px',
       scrollPaddingRight: scrollPadding?.right ?? '0px',
       scrollPaddingBottom: scrollPadding?.bottom ?? '0px',
       scrollPaddingLeft: scrollPadding?.left ?? '0px',
-    }}
-    ref={ref}
-    {...props}
-  >
-    {children}
-  </div>
-);
+      '--snaplist-snap-type': snapType ?? 'mandatory',
+    }),
+    [height, scrollPadding, snapType, width],
+  );
+
+  return (
+    <div
+      className={mergeStyles(
+        'snaplist',
+        styles.snaplist,
+        styles[`snaplist_${direction}`],
+        disabled ? null : styles[`snaplist_active_${direction}`],
+        disableScroll ? styles.snaplist_scroll_disabled : styles[`snaplist_scroll_${direction}`],
+        hideScrollbar ? styles.snaplist_hide_scrollbar : null,
+        className,
+      )}
+      style={{ ...dynamicStyles, ...style }}
+      ref={ref}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+};
 
 type WithChildren<T> = T & { children?: React.ReactNode };
 
