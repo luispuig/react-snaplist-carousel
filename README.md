@@ -17,7 +17,7 @@ A modern way to do a classic thing.
 <p>
   <img alt="react-snaplist-carousel" src="readme/horizontal.gif?raw=true" width="33%" />
   <img alt="react-snaplist-carousel" src="readme/vertical.gif?raw=true" width="33%" />
-  <img alt="react-snaplist-carousel" src="readme/list.gif?raw=true" width="33%" /> 
+  <img alt="react-snaplist-carousel" src="readme/list.gif?raw=true" width="33%" />
 </p>
 <p>
   <a href="https://luispuig.github.io/react-snaplist-carousel/" target="_blank">
@@ -208,6 +208,7 @@ export const App = () => {
 
 - `direction` { horizontal | vertical }: Scroll direction. \*
 - `disableScroll` { boolean | undefined }: Disable the native scroll on swipe or mouse wheel.
+- `snapType` { mandatory | proximity }. Optional (default mandatory): Change how items are snapped inside the container.
 - `width` { string | undefined }: Width CSS property
 - `height` { string | undefined }: Height CSS property
 - `scrollPadding` { {

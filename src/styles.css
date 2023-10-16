@@ -22,11 +22,11 @@
 }
 
 .snaplist_active_horizontal {
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x var(--snaplist-snap-type, mandatory);
 }
 
 .snaplist_active_vertical {
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y var(--snaplist-snap-type, mandatory);
 }
 
 .snaplist_scroll_disabled {
