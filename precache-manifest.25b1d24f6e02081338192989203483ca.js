@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a6d16c951e9dcce2c859b88dec7b59c2",
+    "revision": "c986104ddb72633d104c2e7ce4c4b6dc",
     "url": "/react-snaplist-carousel/index.html"
   },
   {
-    "revision": "1b74110ed72676e386d2",
+    "revision": "4cc7555d41c5866bcafa",
     "url": "/react-snaplist-carousel/static/css/main.0fb30e4c.chunk.css"
   },
   {
-    "revision": "b5bd18b6496cc9e67349",
-    "url": "/react-snaplist-carousel/static/js/2.0f185561.chunk.js"
+    "revision": "b00188a3b652ac48fded",
+    "url": "/react-snaplist-carousel/static/js/2.b3e6f142.chunk.js"
   },
   {
     "revision": "99bd0487192ec9e7d9ee8fbbd91ee444",
-    "url": "/react-snaplist-carousel/static/js/2.0f185561.chunk.js.LICENSE.txt"
+    "url": "/react-snaplist-carousel/static/js/2.b3e6f142.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "1b74110ed72676e386d2",
-    "url": "/react-snaplist-carousel/static/js/main.0a85331a.chunk.js"
+    "revision": "4cc7555d41c5866bcafa",
+    "url": "/react-snaplist-carousel/static/js/main.17fd71b6.chunk.js"
   },
   {
-    "revision": "a75371711f79e363b8a0",
-    "url": "/react-snaplist-carousel/static/js/runtime-main.6ac525ce.js"
+    "revision": "3a277af13a2216e856ff",
+    "url": "/react-snaplist-carousel/static/js/runtime-main.92da8216.js"
   },
   {
     "revision": "03fc9a428a15179b2ae0a9702fb4eecf",
