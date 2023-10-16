@@ -105,5 +105,8 @@
     "hooks": {
       "pre-commit": "npm run precommit"
     }
+  },
+  "volta": {
+    "node": "16.20.2"
   }
 }
