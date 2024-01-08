@@ -87,7 +87,7 @@ export const SnapItem: React.FC<{
   forceStop?: boolean;
   className?: string;
   children?: React.ReactNode;
-}> = ({ children, margin, snapAlign = 'center', forceStop = false, width, height, className }) => (
+}> = ({ children, margin, snapAlign = 'center', forceStop = false, width, height, className, ...props }) => (
   <div
     className={mergeStyles(
       'snapitem',
@@ -104,6 +104,7 @@ export const SnapItem: React.FC<{
       width,
       height,
     }}
+    {...props}
   >
     {children}
   </div>
